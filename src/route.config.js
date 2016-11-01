@@ -1,0 +1,55 @@
+/* eslint-disable global-require*/
+import VueRouter from 'vue-router';
+import Vue from 'vue';
+
+import management from './pages/management'
+import search from './components/search/search.vue';
+import search_result from './components/search/search_result.vue'
+import vis from './components/vis/vis.vue'
+
+Vue.use(VueRouter);
+let route = [
+    {
+        path: '/management',
+        name: 'management',
+        component: management,
+        children:[
+            {
+                path: 'upload',
+                name: '情报添加',
+                component: require('./pages/upload-page.vue'),
+            },
+            {
+                path: 'update',
+                name: '情报修改',
+                component: require('./pages/update-page.vue'),
+            },
+            {
+                path: 'download',
+                name: '情报下载',
+                component: require('./pages/download-page.vue'),
+            }
+        ] },
+    { path: '/search', name: 'search', component: search },
+    { path: '/searchResult', name: 'search_result', component: search_result },
+    { path: '/vis', name: 'vis', component: vis }
+
+];
+
+route.push({ path: '*', redirect: '/management' });
+
+const router = new VueRouter({
+    mode: 'hash',
+    /* default */
+    routes: route,
+});
+
+const routes = [
+    { path: '/management', name: 'management', component: management },
+    { path: '/search', name: 'search', component: search },
+    { path: '/searchResult', name: 'search_result', component: search_result },
+    { path: '/vis', name: 'vis', component: vis }
+];
+
+
+export default router;
