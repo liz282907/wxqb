@@ -10,9 +10,9 @@
     <ul :class="fileNameListClass">
       <li v-for="(fileObj,index) in fileObjList" :key="fileObj.file.name" :class="uploadItemClass" v-if="listType==='text'">
         <div class="text-item  clearfix" >
-            <i class="iconfont fujian">&#xf015b;</i>
+            <i class="iconfont fujian">&#xe69c;</i>
             <span>{{fileObj.file.name}}</span>
-            <i class="iconfont delete" @click="removeFile(fileObj.file)">&#xe606;</i>
+            <i class="iconfont delete" @click="removeFile(fileObj.file)">&#xe618;</i>
         </div>
 
         <transition name="progress">
@@ -289,7 +289,7 @@ export default {
         that.fileObjList[index].percent = e.percent+"%";
         that.$emit("onProgress",file);
 
-        if(e.percent===100) that.handleFilePreview(file);
+        if(e.percent===100 && that.listType==='card') that.handleFilePreview(file);
 
 
 

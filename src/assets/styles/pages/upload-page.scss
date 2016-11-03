@@ -1,0 +1,26 @@
+.inner-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.upload-demo{
+    width: 450px;
+    .btn-group{
+        margin-top: 30px;
+        text-align: right;
+    }
+
+}
+.btn{
+     padding: 10px 14px;
+     margin-right: 10px;
+    font-family: "Helvetica-Neue", "Helvetica","Microsoft Yahei", Arial, sans-serif;
+     color: #999;
+     border: 1px solid #57c5f7;
+     border-radius: 6px;
+     &:hover{
+        background-color: #57c5f7;
+        color: #fff;
+     }
+}

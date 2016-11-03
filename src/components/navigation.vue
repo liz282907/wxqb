@@ -1,10 +1,10 @@
 <template>
   <div id="navigation">
-    <div v-for="(title,key) in nav">
-      <router-link class="nav-div" :to="title.url" >
+    <!-- <div > -->
+      <router-link  v-for="(title,key) in nav" class="nav-div" :to="title.url" >
         {{title.name}}
       </router-link>
-    </div>
+<!--     </div> -->
   </div>
 </template>
 

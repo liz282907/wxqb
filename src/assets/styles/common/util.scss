@@ -7,3 +7,15 @@
 .clearfix{
     zoom:1;
 }
+.disable-base{
+    cursor: not-allowed;
+    color: #c0ccda;
+    border-color: #d3dce6;
+    background-color: #fff;
+}
+.btn.disabled{
+    @extend .disable-base;
+    &:hover{
+        @extend .disable-base;
+    }
+}
