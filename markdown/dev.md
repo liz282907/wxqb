@@ -1,0 +1,1 @@
+1, app-main.vue里面header 布局，要把header的class抽出props

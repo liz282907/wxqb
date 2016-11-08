@@ -6,40 +6,33 @@
 }
 
 .management-container{
-    display:flex;
-    .left-nav{
-      width: 200px;
-      background:rgb(22,50,65);
-    }
-    .right-container{
-      flex: 1;
-    }
+    height: 100%;
 }
 
-.management-float-nav-container{
-    position:fixed;
-    width:130px;
-    left:50px;
-    height:100%;
-}
+// .management-float-nav-container{
+//     position:fixed;
+//     width:130px;
+//     left:50px;
+//     height:100%;
+// }
 
-.management-float-nav{
-    color:white;
-    text-align:center;
-    background:rgb(71,147,185);
-    border-radius:5px;
-    margin:10px 0;
-    height:3rem;
-    line-height:3rem;
-    font-family:"Microsoft Yahei";
-    cursor:pointer;
-    box-shadow:0 3px 0 rgb(36,89,120);
-    a{
-      color: white;
-    }
-}
+// .management-float-nav{
+//     color:white;
+//     text-align:center;
+//     background:rgb(71,147,185);
+//     border-radius:5px;
+//     margin:10px 0;
+//     height:3rem;
+//     line-height:3rem;
+//     font-family:"Microsoft Yahei";
+//     cursor:pointer;
+//     box-shadow:0 3px 0 rgb(36,89,120);
+//     a{
+//       color: white;
+//     }
+// }
 
-.management-float-nav:hover{
-    background:rgb(36,89,120);
-    box-shadow:none;
-}
+// .management-float-nav:hover{
+//     background:rgb(36,89,120);
+//     box-shadow:none;
+// }

@@ -1,8 +1,18 @@
 <template>
   <div class="app-main">
-    <main-header></main-header>
-      <router-view></router-view>
-    <main-footer></main-footer>
+    <div class="header">
+        <main-header></main-header>
+    </div>
+    <div class="container">
+        <router-view></router-view>
+    </div>
+
+
+    <div class="footer">
+        <main-footer></main-footer>
+    </div>
+
+
   </div>
 </template>
 
@@ -28,9 +38,19 @@ export default {
 $base-background: #F4F4F4;
 
 .app-main{
-    display:flex;
-    flex-direction:column;
-    height:100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     background-color: $base-background;
+    .header{
+      height: 64px;
+    }
+    .footer{
+      height: 64px;
+    }
+    .container{
+      flex: 1;
+    }
+
 }
 </style>
