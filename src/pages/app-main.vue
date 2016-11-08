@@ -40,7 +40,7 @@ $base-background: #F4F4F4;
 .app-main{
     display: flex;
     flex-direction: column;
-    height: 100%;
+    // height: 100vh;
     background-color: $base-background;
     .header{
       height: 64px;

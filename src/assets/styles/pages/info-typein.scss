@@ -1,6 +1,7 @@
 
 $nav-large-color:#666;
 $active-blue: #2DB6F4;
+$divider-color: #EBEBEB;
 
 @mixin font($weight,$size){
     font-size: $size;
@@ -10,6 +11,33 @@ $active-blue: #2DB6F4;
 a{
     color: $nav-large-color;
 }
+span{
+    font-size: 14px;
+}
+i{
+    cursor: pointer;
+}
+
+/*****************reset element *********************/
+.el-slider__runway.show-input{
+    margin-right: 120px;
+}
+.el-input-number--small{
+    width: 100px;
+}
+.el-date-editor,.el-date-editor__editor,.el-time-panel__footer{
+    // height: 24px;
+}
+.el-icon-plus,.el-icon-minus{
+    margin-top: 3px;
+}
+.el-input{
+    display: inline-block;
+}
+.el-textarea{
+    width: 80%;
+}
+
 
 
 .my-info-container{
@@ -17,13 +45,16 @@ a{
     height: 100%;
     margin: 0;
     display: flex;
+    color: $nav-large-color;
     .info-nav{
         width: 120px;
         padding-top: 60px;
     }
     .info-main{
         flex: 1;
+        overflow: auto;
         background-color: white;
+        padding: 50px;
     }
 }
 .info-out-navitem{
@@ -46,7 +77,9 @@ a{
     border-right: 6px solid $active-blue;
 }
 .info-inner-navitem{
-    box-sizing: border-box;
+    // box-sizing: border-box;
+    border-right: 6px solid transparent;
+
 }
 .info-inner-navitem>a{
     display: block;
@@ -62,4 +95,53 @@ a{
 
 .active{
     border-right: 6px solid $active-blue;
+}
+
+/*************************************************************/
+#ip{
+    h3{
+        width: 100%;
+    }
+    .card-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        .card{
+            flex: 1;
+            padding: 0 20px;
+            box-sizing: border-box;
+            min-width: 50%;
+            margin-bottom: 40px;
+        }
+        .card:nth-child(odd){
+            border-right: 1px solid $divider-color;
+        }
+    }
+
+    .sub-title{
+        font-size: 14px;
+        margin: 10px auto;
+        background: #F4F4F4;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+    .form-item{
+        display: flex;
+        line-height: 36px;
+        margin: 10px 0;
+        .form-left{
+            width: 100px;
+            text-align: right;
+            padding-right: 20px;
+        }
+        .form-right{
+            flex: 1;
+            vertical-align: middle;
+            // display: inline-block;
+        }
+    }
+}
+
+.two-column{
+    display: inline-block;
+    width: 49%;
 }
