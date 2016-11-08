@@ -81,6 +81,9 @@ export default {
     },
     beforeUpload:{
       type: Function
+    },
+    data:{
+      type: Object
     }
   },
   data() {

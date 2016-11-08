@@ -1,21 +1,13 @@
 <template>
   <div id="app">
-    <navigation></navigation>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import navigation from './components/navigation'
 
 export default {
   name: 'app',
-  components: {
-    navigation
-  },
-  mounted:function(){
-
-  }
 }
 </script>
 
@@ -31,8 +23,8 @@ body,html{
   padding:0;
   width:100%;
   height:100%;
-  min-width:1366px;
-  min-height:768px;
+  // min-width:1366px;
+  // min-height:768px;
 }
 
 #app{
