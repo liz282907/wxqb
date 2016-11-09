@@ -62,14 +62,15 @@ response:{
 
 ```
 
-- 端口号的问题，65536个么还是？直接让用户输入？输入的话单个多个？。
+- 端口号的问题，65536个么还是？直接让用户输入？输入的话单个多个？。(用户直接输入，多个，list)
 
 
 ---
 
 #### 情报添加的post请求
 
-Q: 因为表众多，填写的时候是等所有的都填完再提交还是每张表填完提交？也涉及到url的问题
+Q: 因为表众多，填写的时候是等所有的都填完再提交还是每张表填完提交？也涉及到url的问题。
+A: 两者都可以,request里字典做区分
 
 暂时是ip部分
 ```
@@ -77,15 +78,15 @@ url: yoursite.com/management/info/create
 method: "post"
 request:{
     "ip":{
-            "credibility": 0,                 //是否有默认值？
+            "credibility": 0,                 //是否有默认值？（最好没有默认值）
             "discoveryTime": '2016-11-09 13:18:28', //格式
             "survivability": '是',                  // or boolean?
             "credit_source": '',
-            "credit_sourceReliability": 0,  //是否有默认值？
+            "credit_sourceReliability": 0,  //是否有默认值？（最好没有默认值）
 
             "protocals":['HTTP','FTP'],
-            "os":'',                   //string or []?
-            "portList":[''],            // []？
+            "os":'',                   //string or []?（string）
+            "portList":[''],            // []？（[]）
             "dev_source": '',
             "dev_sourceReliability": 0,      
 
@@ -94,8 +95,8 @@ request:{
             "geo_source": '',
             "geo_sourceReliability": 0,    
             "geo":{
-                "country":'中国',                // 代号orstring?
-                "district": '北京',              //中英文？
+                "country":'中国',                // 代号orstring?(string)
+                "district": '北京',              //中英文？(英文)
                 "longtitude": '',   //string or num?
                 "latitude": ''
             },
@@ -110,3 +111,4 @@ request:{
 
 ### 问题
 1. 经纬度的输入问题，直接让用户输？
+   可输，可不输。不输就是空

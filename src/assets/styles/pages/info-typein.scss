@@ -97,6 +97,14 @@ i{
     border-right: 6px solid $active-blue;
 }
 
+
+
+.section-item{
+    padding: 40px 0;
+    border-bottom: 2px dashed $divider-color;
+}
+
+
 /*************************************************************/
 #ip{
     h3{
@@ -116,13 +124,26 @@ i{
             border-right: 1px solid $divider-color;
         }
     }
+    .button-group{
+        margin-top: 20px;
+        text-align: center;
+    }
 
+    .card{
+        text-align: center;
+        .sub-title{
+            display: inline-block;
+            margin: 10px auto 20px;
+        }
+        .form-part{
+            text-align: left;
+        }
+
+    }
     .sub-title{
         font-size: 14px;
-        margin: 10px auto;
+        padding: 3px 7px;
         background: #F4F4F4;
-        display: inline-block;
-        margin-bottom: 20px;
     }
     .form-item{
         display: flex;

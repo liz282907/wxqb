@@ -18,18 +18,18 @@ export default {
 @import './assets/styles/components/index.scss';
 @import './assets/styles/pages/index.scss';
 
-body,html{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  // min-width:1366px;
-  // min-height:768px;
-}
+// body,html{
+//   margin:0;
+//   padding:0;
+//   width:100%;
+//   // height:100%;
+//   // min-width:1366px;
+//   // min-height:768px;
+// }
 
 #app{
   display:flex;
   flex-direction:column;
-  height:100%;
+  // height:100%;
 }
 </style>
