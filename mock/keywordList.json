@@ -1,0 +1,45 @@
+{
+    "keywordList":[
+    {
+        "keyword": "习近平",
+        "entryTime": "1476928511644",
+        "assessTime": "1476928511644",
+        "source": "张三",
+        "categories": [4,3],
+        "status": 1
+    },
+    {
+         "keyword": "习近平1",
+        "entryTime": "1476928511644",
+        "assessTime": "1476928511644",
+        "source": "张三",
+        "categories": [2],
+        "status": 2
+    },
+    {
+        "keyword": "习近平2",
+        "entryTime": "1476928511644",
+        "assessTime": "",
+        "source": "张三",
+        "categories": [],
+        "status": 0
+    },
+    {
+        "keyword": "习近平3",
+        "entryTime": "1476928511644",
+        "assessTime": "1476928511644",
+        "source": "张三",
+        "categories": [4,2],
+        "status": 1
+    },
+    {
+        "keyword": "习近平4",
+        "entryTime": "1476928511644",
+        "assessTime": "1476928511644",
+        "source": "张三",
+        "categories": [2],
+        "status": -1
+    }
+    ],
+    "totalSize": 4
+    }

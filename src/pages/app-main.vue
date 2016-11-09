@@ -38,6 +38,8 @@ export default {
 $base-background: #F4F4F4;
 
 .app-main{
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     background-color: $base-background;

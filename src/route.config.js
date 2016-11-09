@@ -67,9 +67,26 @@ route.push({ path: '/app/management*', redirect: '/app/management/info-typein' }
 
 const router = new VueRouter({
     mode: 'hash',
+
+    scrollBehavior,
     /* default */
     routes: route,
 });
+
+const scrollBehavior = (to, from, savedPosition) => {
+  if (savedPosition) {
+    return savedPosition
+  } else {
+    const position = {}
+
+    if (to.hash) {
+      position.selector = to.hash
+    }
+    console.log("---------",position);
+
+    return position
+  }
+}
 
 // const routes = [
 //     { path: '/management', name: 'management', component: management },

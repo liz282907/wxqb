@@ -6,7 +6,8 @@
                     <a :href="'#'+section.id">{{section.name}}</a>
                     <ul >
                         <li v-for="item in section.children" class="info-inner-navitem">
-                            <a :href="'#'+item.id">{{item.name}}</a>
+                            <router-link :to=" '/app/management/info-typein#'+item.id ">{{item.name}}</router-link>
+                            <!-- <a :href="'#'+item.id">{{item.name}}</a> -->
                         </li>
                     </ul>
                 </li>
@@ -189,7 +190,7 @@
                     </div>
                 </el-form>
 
-
+            <div id="dns" class="section-item" ></div>
 
 
             </div>
@@ -246,6 +247,10 @@ export default {
     }
   },
   computed:{
+
+  },
+
+  created(){
 
   },
   components: {
