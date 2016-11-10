@@ -1,0 +1,18 @@
+{
+    "protocols":["HTTP","FTP","SMTP"],
+    "osList": ["ubuntu","windows","linux","kali"],
+    "geo":[
+            {
+                "country":"中国",
+                "district":["shanghai","peking","tianjing","chengdu"]
+            },
+            {
+                "country":"美国",
+                "district":["washington","NewYork","Boston","Califonia"]
+            },
+            {
+                "country":"中国1",
+                "district":["shanghai1","peking1","tianjing1","chengdu1"]
+            }
+        ]
+}

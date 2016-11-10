@@ -29,7 +29,13 @@ const navlistOfManagement = [
         "name":"情报下载",
         "url":"/management/download"
     }
-]
+];
+
+const base = '';
+const serverUrl = {
+    serverInfo: base+'/serverInfo',
+    createInfo: base+ 'management/info/create'
+}
 
 
-export { nav,navlistOfManagement };
+export { nav,navlistOfManagement,serverUrl };

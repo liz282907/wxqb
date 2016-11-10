@@ -1,5 +1,5 @@
 <template>
-    <div class="my-info-container">
+    <div class="my-info-container"  v-loading.fullscreen.lock ="fullscreenLoading">
         <aside class="info-nav">
             <ul >
                 <li v-for="section in locals.sections" class="info-out-navitem" >
@@ -15,7 +15,12 @@
         </aside>
         <div class="info-main">
             <div id="ip" class="section-item">
-                <h3 class="title">IP</h3>
+                <h3 class="title">IP :
+                    <el-input
+                      placeholder="请输入ip"
+                      v-model="ip.ip">
+                    </el-input>
+                </h3>
                 <el-form ref="ipForm" :model="ip"  @submit.native.prevent="onSaveIpForm"
                     <div class="card-wrapper">
                         <div class="card">
@@ -66,9 +71,9 @@
                             <div class="form-part">
                                 <div class="form-item">
                                     <span class="form-left">涉及协议 : </span>
-                                     <el-select v-model="ip.protocals" multiple>
+                                     <el-select size="small" v-model="ip.protocals" multiple>
                                         <el-option
-                                          v-for="item in serverInfo.protocals"
+                                          v-for="item in serverInfo.protocols"
                                           :label="item"
                                           :value="item">
                                         </el-option>
@@ -76,7 +81,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">操作系统 : </span>
-                                     <el-select v-model="ip.os" >
+                                     <el-select size="small" v-model="ip.os" >
                                         <el-option
                                           v-for="item in serverInfo.osList"
                                           :label="item"
@@ -116,6 +121,26 @@
                                     <span class="form-left">地理位置：</span>
                                     <div class="form-right">
                                         <div>
+                                            <div class="two-column">
+                                                <span>国家</span>
+                                                <el-select size="small" v-model="ip.geo.country" @change="changeCountry">
+                                                    <el-option
+                                                      v-for="country in countryList"
+                                                      :label="country"
+                                                      :value="country">
+                                                    </el-option>
+                                                  </el-select>
+                                            </div>
+                                            <div class="two-column">
+                                                <span>城市</span>
+                                                <el-select size="small" v-model="ip.geo.district" >
+                                                    <el-option
+                                                      v-for="district in districtList"
+                                                      :label="district"
+                                                      :value="district">
+                                                    </el-option>
+                                                  </el-select>
+                                            </div>
                                             <div class="two-column">
                                                 <span>经度</span>
                                                 <el-input size="small"
@@ -203,10 +228,8 @@
 
 <script>
 import { sections } from '../../const/constants';
-const protocals = [
-    'HTTP','FTP','SMTP'
-];
-const osList = ['windows','MacOs','ubuntu'];
+import { serverUrl }from '../../const/url'
+
 
 export default {
   data(){
@@ -215,10 +238,13 @@ export default {
             sections,
         },
         serverInfo:{
-            protocals,
-            osList
+            protocols:[],
+            osList:[],
+            geo: []
         },
+        fullscreenLoading: false,
         ip:{
+            ip: '',
             credibility: 0,
             discoveryTime: '',
             survivability: '是',
@@ -247,18 +273,56 @@ export default {
     }
   },
   computed:{
-
+    transformedGeo(){
+        return this.serverInfo.geo.reduce((prev,countryInfo)=>{
+            prev[countryInfo.country] = countryInfo.district;
+            return prev;
+        },{});
+    },
+    countryList(){
+        return Object.keys(this.transformedGeo);
+    },
+    districtList(){
+        const choice = this.ip.geo.country;
+        return this.transformedGeo[choice];
+    }
   },
 
-  created(){
+  mounted(){
+    this.fullscreenLoading = true;
+    axios.get(serverUrl.serverInfo)
+        .then(response=> {
+            // debugger;
+            this.fullscreenLoading = false;
+            this.serverInfo = response.data;
+        })
+        .catch(err=>{
+            console.log(err);
+            this.fullscreenLoading = false;
+            this.$message({message: "获取服务器数据失败，请刷新",type:'warning'});
+        })
 
   },
   components: {
 
   },
   methods:{
+    changeCountry(){
+        this.ip.geo.district = '';
+    },
     onSaveIpForm(){
-        console.log("-----------");
+        let {ip,...postBody} = this.ip;
+        axios.post(serverUrl.createInfo,{
+            [ip]:postBody
+        })
+        .then(response=> {
+            this.$message({message: "提交ip成功",type:'success'});
+
+        })
+        .catch(err=>{
+            console.log(err);
+            this.$message({message: "创建ip失败",type:'error'});
+        });
         console.log(this.ip);
     }
   }

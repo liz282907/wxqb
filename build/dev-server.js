@@ -78,7 +78,14 @@ app.get("/wxqb/search/searchAsso_init",function(req,res){
     res.json(temp);
 });
 
+app.get('/serverInfo',function(req,res){
+  var temp = JSON.parse(fs.readFileSync("./mock/serverInfo.json"));
+    res.json(temp);
+})
 app.post("/myupload",function(req,res){
+  res.json({msg: "success"});
+});
+app.post("/management/info/create",function(req,res){
   res.json({msg: "success"});
 });
 
