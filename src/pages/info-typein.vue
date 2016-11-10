@@ -6,8 +6,10 @@
                     <a :href="'#'+section.id">{{section.name}}</a>
                     <ul >
                         <li v-for="item in section.children" class="info-inner-navitem">
-                            <router-link :to=" '/app/management/info-typein#'+item.id ">{{item.name}}</router-link>
-                            <!-- <a :href="'#'+item.id">{{item.name}}</a> -->
+                            <!-- <router-link :to=" '/app/management/info-typein#'+item.id " @click.native.prevent="scrollTo(item.id)">{{item.name}}</router-link> -->
+                            <a :href="'/app/management/info-typein#'+item.id"
+                                @click.prevent="scrollTo(item.id)"
+                            >{{item.name}}</a>
                         </li>
                     </ul>
                 </li>
@@ -307,6 +309,22 @@ export default {
 
   },
   methods:{
+    scrollTo(hash){
+
+        // debugger;
+        // e.preventDefault();
+        const el = document.getElementById(hash);
+        if(el){
+            window.scroll(el.offsetLeft,el.offsetTop);
+            console.log("--------");
+            // window.scroll({
+            //     top: el.offsetTop,
+            //     left: el.offsetLeft,
+            //     // behavior: 'smooth'
+            // });
+        }
+
+    },
     changeCountry(){
         this.ip.geo.district = '';
     },
