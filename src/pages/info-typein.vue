@@ -315,7 +315,7 @@ export default {
         // e.preventDefault();
         const el = document.getElementById(hash);
         if(el){
-            window.scroll(el.offsetLeft,el.offsetTop);
+            window.scroll(el.offsetLeft,el.offsetTop-64);
             console.log("--------");
             // window.scroll({
             //     top: el.offsetTop,

@@ -38,12 +38,16 @@ export default {
 $base-background: #F4F4F4;
 
 .app-main{
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    // height: 100vh;
+    // overflow: hidden;
+    // display: flex;
+    // flex-direction: column;
     background-color: $base-background;
     .header{
+      position: fixed;
+      // left: 0;right: 0;
+      width: 100%;
+      z-index: 1000;
       height: 64px;
     }
     .footer{
@@ -51,6 +55,7 @@ $base-background: #F4F4F4;
     }
     .container{
       flex: 1;
+      margin-top: 64px;
       height: calc(100vh - 64px);
     }
 
