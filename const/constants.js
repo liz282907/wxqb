@@ -34,8 +34,10 @@ const sections = [
         name: '提交',
         id:'submit'
     }
-]
+];
+
+const methods = ['POST','GET','PUT','PATCH','DELETE','OPTIONS'];
 
 
 
-export { navList,sections };
+export { navList,sections,methods };

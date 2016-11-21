@@ -31,10 +31,12 @@ const navlistOfManagement = [
     }
 ];
 
-const base = '';
+// const base = 'http://10.10.20.140:8089/ip';
+const localBase = '';
 const serverUrl = {
-    serverInfo: base+'/serverInfo',
-    createInfo: base+ 'management/info/create'
+    serverInfo: localBase+'ip/serverInfo',
+    createInfo: localBase+ 'ip/serverInfo'
+    // createInfo: localBase+ '/management/info/create'
 }
 
 

@@ -2,6 +2,7 @@ var config = require('../config')
 if (!process.env.NODE_ENV) process.env.NODE_ENV = config.dev.env
 var path = require('path')
 var express = require('express')
+var bodyParser = require('body-parser')
 var fs = require('fs')
 var webpack = require('webpack')
 var opn = require('opn')
@@ -44,6 +45,11 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(context, options))
 })
 
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
 // handle fallback for HTML5 history API
 //app.use(require('connect-history-api-fallback')())
 
@@ -78,7 +84,7 @@ app.get("/wxqb/search/searchAsso_init",function(req,res){
     res.json(temp);
 });
 
-app.get('/serverInfo',function(req,res){
+app.get('/ip/serverInfo',function(req,res){
   var temp = JSON.parse(fs.readFileSync("./mock/serverInfo.json"));
     res.json(temp);
 })
@@ -86,6 +92,8 @@ app.post("/myupload",function(req,res){
   res.json({msg: "success"});
 });
 app.post("/management/info/create",function(req,res){
+  console.log(req);
+  console.log(req.body);
   res.json({msg: "success"});
 });
 

@@ -49,7 +49,8 @@ let route = [
                     path: 'download',
                     name: '情报下载',
                     component: require('./pages/download-page.vue'),
-                }
+                },
+                { path: '*', redirect: '/app/management/info-typein.vue' }
             ]
         },
         { path: 'searchResult', name: 'search_result', component: search_result },
@@ -62,7 +63,7 @@ let route = [
 ];
 
 route.push({ path: '*', redirect: '/app/management' });
-route.push({ path: '/app/*', redirect: '/app/management' });
+route.push({ path: '/app*', redirect: '/app/management' });
 route.push({ path: '/app/management*', redirect: '/app/management/info-typein' })
 
 const router = new VueRouter({

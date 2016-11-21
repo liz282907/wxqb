@@ -23,7 +23,7 @@
                       v-model="ip.ip">
                     </el-input>
                 </h3>
-                <el-form ref="ipForm" :model="ip"  @submit.native.prevent="onSaveIpForm"
+                <el-form ref="ipForm" :model="ip"
                     <div class="card-wrapper">
                         <div class="card">
                             <span class="sub-title">信誉</span>
@@ -212,14 +212,242 @@
                         </div>
                     </div>
                     <div class="button-group">
-                        <el-button size="small" type="primary"  @click.native="onSaveIpForm" native-type="submit">保存</el-button>
+                        <el-button size="small" type="primary"  @click.native="onSaveTargetForm('ip')" native-type="submit">保存</el-button>
                         <el-button size="small" @click.native.prevent>取消</el-button>
                     </div>
                 </el-form>
+            </div>
+            <div id="dns" class="section-item" >
+                <h3 class="title">DNS :
+                    <el-input
+                      placeholder="请输入DNS"
+                      v-model="dns.dns">
+                    </el-input>
+                </h3>
+                <el-form ref="ipForm" :model="dns"
+                    <div class="card-wrapper">
+                        <div class="card">
+                            <span class="sub-title">whois</span>
+                            <div class="form-part">
+                                <div class="form-item">
+                                    <span class="form-left">注册人 :</span>
+                                    <el-input
+                                      placeholder="请输入注册人信息"
+                                      v-model="dns.registerant">
+                                    </el-input>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">注册邮箱 :</span>
+                                    <el-input
+                                      placeholder="请输入注册邮箱"
+                                      v-model="dns.regEmail">
+                                    </el-input>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">注册时间 :</span>
+                                    <el-date-picker
+                                      v-model="dns.registerTime"
+                                      type="datetime"
+                                      placeholder="选择日期时间">
+                                    </el-date-picker>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">ISP :</span>
+                                    <el-input
+                                      placeholder="请输入服务提供商"
+                                      size="small"
+                                      v-model="dns.vps">
+                                    </el-input>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">来源 :</span>
+                                    <el-input
+                                      placeholder="请输入来源"
+                                      size="small"
+                                      v-model="dns.source">
+                                    </el-input>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">可靠性
+                                        <el-tooltip class="item" effect="dark" content="0-30：不可靠；31-75：比较可靠；76-100：可靠" placement="top-start">
+                                            <i class="iconfont">&#xe683;</i>
+                                        </el-tooltip>
+                                    :</span>
+                                    <el-slider class="form-right" v-model="dns.sourceReliability" show-input></el-slider>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <span class="sub-title">信誉</span>
+                            <div class="form-part">
+                                <div class="form-item">
+                                    <span class="form-left">信誉度
+                                        <el-tooltip class="item" effect="dark" content="0-30：低；31-75：中；76-100：高" placement="top-start">
+                                            <i class="iconfont">&#xe683;</i>
+                                        </el-tooltip>
+                                    :</span>
+                                    <el-slider class="form-right" v-model="dns.credibility" show-input></el-slider>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">发现时间 :</span>
+                                    <el-date-picker
+                                      v-model="dns.discoveryTime"
+                                      type="datetime"
+                                      placeholder="选择日期时间">
+                                    </el-date-picker>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">来源 :</span>
+                                    <el-input
+                                      placeholder="请输入来源"
+                                      v-model="dns.whois_source">
+                                    </el-input>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">可靠性
+                                        <el-tooltip class="item" effect="dark" content="0-30：不可靠；31-75：比较可靠；76-100：可靠" placement="top-start">
+                                            <i class="iconfont">&#xe683;</i>
+                                        </el-tooltip>
+                                    :</span>
+                                    <el-slider class="form-right" v-model="dns.whois_sourceReliability" show-input></el-slider>
+                                </div>
+                            </div>
+                        </div>
 
-            <div id="dns" class="section-item" ></div>
+                        <div class="card">
+                            <span class="sub-title">其他信息</span>
+                            <div class="form-part">
+                                <div class="form-item">
+                                    <span class="form-left">备注</span>
+                                    <el-input
+                                      type="textarea"
+                                      :autosize="{ minRows: 4}"
+                                      placeholder="请输入内容"
+                                      v-model="dns.note">
+                                    </el-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <el-button size="small" type="primary"  @click.native="onSaveTargetForm('dns')" native-type="submit">保存</el-button>
+                        <el-button size="small" @click.native.prevent>取消</el-button>
+                    </div>
+                </el-form>
+            </div>
+            <div id="url" class="section-item" >
+                <h3 class="title">URL :
+                    <el-input
+                      placeholder="请输入url"
+                      v-model="url.url">
+                    </el-input>
+                </h3>
+                <el-form ref="urlForm" :model="url"
+                    <div class="card-wrapper">
+                        <div class="card">
+                            <span class="sub-title">基本信息</span>
+                            <div class="form-part">
+                                <div class="form-item">
+                                    <span class="form-left">存活 :</span>
+                                    <el-radio-group size="small" v-model="url.survivability">
+                                      <el-radio-button label="是"></el-radio-button>
+                                      <el-radio-button label="否"></el-radio-button>
+                                    </el-radio-group>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">初次发现时间 :</span>
+                                    <el-date-picker
+                                      v-model="url.firstDiscoveryTime"
+                                      type="datetime"
+                                      placeholder="选择日期时间">
+                                    </el-date-picker>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">来源 :</span>
+                                    <el-input
+                                      placeholder="请输入来源"
+                                      size="small"
+                                      v-model="url.basic_source">
+                                    </el-input>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">可靠性
+                                        <el-tooltip class="item" effect="dark" content="0-30：不可靠；31-75：比较可靠；76-100：可靠" placement="top-start">
+                                            <i class="iconfont">&#xe683;</i>
+                                        </el-tooltip>
+                                    :</span>
+                                    <el-slider class="form-right" v-model="url.basic_sourceReliability" show-input></el-slider>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <span class="sub-title">webshell</span>
+                            <div class="form-part">
+                                <div class="form-item">
+                                    <span class="form-left">请求方法 :</span>
+                                    <el-select size="small" v-model="url.requestMethod" multiple>
+                                        <el-option
+                                          v-for="item in locals.methods"
+                                          :label="item"
+                                          :value="item">
+                                        </el-option>
+                                      </el-select>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">webshell类型 :</span>
+                                    <el-select size="small" v-model="url.webshellType" multiple>
+                                        <el-option
+                                          v-for="item in serverInfo.webshellTypes"
+                                          :label="item"
+                                          :value="item">
+                                        </el-option>
+                                      </el-select>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">webshell所属页面名称 :</span>
+                                    <el-input
+                                      placeholder="请输入来源"
+                                      v-model="url.pageName">
+                                    </el-input>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">来源 :</span>
+                                    <el-input
+                                      placeholder="请输入来源"
+                                      v-model="url.ws_source">
+                                    </el-input>
+                                </div>
+                                <div class="form-item">
+                                    <span class="form-left">可靠性
+                                        <el-tooltip class="item" effect="dark" content="0-30：不可靠；31-75：比较可靠；76-100：可靠" placement="top-start">
+                                            <i class="iconfont">&#xe683;</i>
+                                        </el-tooltip>
+                                    :</span>
+                                    <el-slider class="form-right" v-model="url.ws_sourceReliability" show-input></el-slider>
+                                </div>
+                            </div>
+                        </div>
 
-
+                        <div class="card">
+                            <span class="sub-title">其他信息</span>
+                            <div class="form-part">
+                                <div class="form-item">
+                                    <span class="form-left">备注</span>
+                                    <el-input
+                                      type="textarea"
+                                      :autosize="{ minRows: 4}"
+                                      placeholder="请输入内容"
+                                      v-model="url.note">
+                                    </el-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <el-button size="small" type="primary"  @click.native="onSaveTargetForm('url')" native-type="submit">保存</el-button>
+                        <el-button size="small" @click.native.prevent>取消</el-button>
+                    </div>
+                </el-form>
             </div>
         </div>
     </div>
@@ -229,7 +457,7 @@
 </template>
 
 <script>
-import { sections } from '../../const/constants';
+import { sections,methods } from '../../const/constants';
 import { serverUrl }from '../../const/url'
 
 
@@ -238,11 +466,13 @@ export default {
     return {
         locals:{
             sections,
+            methods
         },
         serverInfo:{
             protocols:[],
             osList:[],
-            geo: []
+            geo: [],
+            webshellTypes:[]
         },
         fullscreenLoading: false,
         ip:{
@@ -271,6 +501,41 @@ export default {
             },
             note:''
 
+        },
+        dns:{
+            dns:'',
+            credibility: 0,
+            discoveryTime: '',
+            credit_source: '',
+            credit_sourceReliability: 0,
+
+            Registrant: '',
+            RegEmail: '',
+            RegTime: '',
+            ISP: '',
+            whois_source: '',
+            whois_sourceReliability: 0,
+
+            note:''
+
+        },
+
+        url:{
+            url: '',
+            firstDiscoveryTime: '',
+            actionTags: [],
+            basic_source: '',
+            basic_sourceReliability: 0,
+            survivability: '是',
+
+            requestMethod: '',
+            webshellFile: '',
+            webshellType: '',
+            ws_source: '',
+            ws_sourceReliability: 0,
+            pageName:'',
+            originalFile: '',
+            note:''
         }
     }
   },
@@ -291,7 +556,7 @@ export default {
   },
 
   mounted(){
-    this.fullscreenLoading = true;
+    // this.fullscreenLoading = true;
     axios.get(serverUrl.serverInfo)
         .then(response=> {
             // debugger;
@@ -316,19 +581,29 @@ export default {
         const el = document.getElementById(hash);
         if(el){
             window.scroll(el.offsetLeft,el.offsetTop-64);
-            console.log("--------");
-            // window.scroll({
-            //     top: el.offsetTop,
-            //     left: el.offsetLeft,
-            //     // behavior: 'smooth'
-            // });
         }
 
     },
     changeCountry(){
         this.ip.geo.district = '';
     },
-    onSaveIpForm(){
+    onSaveTargetForm(target){
+        let {[target]:targetValue,...postBody} = this[target];
+        axios.post(serverUrl.createInfo,{
+            [targetValue]:postBody
+        })
+        .then(response=> {
+            this.$message({message: `提交${target}成功`,type:'success'});
+        })
+        .catch(err=>{
+            console.log(err);
+            this.$message({message: `创建${target}失败`,type:'error'});
+        });
+    },
+    onSaveIpForm(target){
+
+        this.onSaveTargetForm(target);
+        /*
         let {ip,...postBody} = this.ip;
         axios.post(serverUrl.createInfo,{
             [ip]:postBody
@@ -342,6 +617,7 @@ export default {
             this.$message({message: "创建ip失败",type:'error'});
         });
         console.log(this.ip);
+        */
     }
   }
 };
