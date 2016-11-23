@@ -34,28 +34,29 @@
                                             <i class="iconfont">&#xe683;</i>
                                         </el-tooltip>
                                     :</span>
-                                    <el-slider class="form-right" v-model="ip.credibility" show-input></el-slider>
+                                    <el-slider class="form-right" v-model="ip.Credibility" show-input></el-slider>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">发现时间 :</span>
                                     <el-date-picker
-                                      v-model="ip.discoveryTime"
+                                      v-model="ip.DiscoveryTime"
                                       type="datetime"
                                       placeholder="选择日期时间">
                                     </el-date-picker>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">存活 :</span>
-                                    <el-radio-group size="small" v-model="ip.survivability">
+                                    <el-radio-group size="small" v-model="ip.Survivability">
                                       <el-radio-button label="是"></el-radio-button>
                                       <el-radio-button label="否"></el-radio-button>
+                                      <el-radio-button label="未知"></el-radio-button>
                                     </el-radio-group>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">来源 :</span>
                                     <el-input
                                       placeholder="请输入来源"
-                                      v-model="ip.credit_source">
+                                      v-model="ip.CREDIT_Source">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -64,7 +65,7 @@
                                             <i class="iconfont">&#xe683;</i>
                                         </el-tooltip>
                                     :</span>
-                                    <el-slider class="form-right" v-model="ip.credit_sourceReliability" show-input></el-slider>
+                                    <el-slider class="form-right" v-model="ip.CREDIT_SourceReliability" show-input></el-slider>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +74,7 @@
                             <div class="form-part">
                                 <div class="form-item">
                                     <span class="form-left">涉及协议 : </span>
-                                     <el-select size="small" v-model="ip.protocals" multiple>
+                                     <el-select size="small" v-model="ip.Protocol" multiple>
                                         <el-option
                                           v-for="item in serverInfo.protocols"
                                           :label="item"
@@ -83,7 +84,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">操作系统 : </span>
-                                     <el-select size="small" v-model="ip.os" >
+                                     <el-select size="small" v-model="ip.OS" >
                                         <el-option
                                           v-for="item in serverInfo.osList"
                                           :label="item"
@@ -94,7 +95,7 @@
                                 <div class="form-item">
                                     <span class="form-left">开放端口 : </span>
                                     <el-input placeholder="请输入端口号" size="small">
-                                        v-model="ip.portList"
+                                        v-model="ip.Port"
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -102,7 +103,7 @@
                                     <el-input
                                       placeholder="请输入来源"
                                       size="small"
-                                      v-model="ip.dev_source">
+                                      v-model="ip.DEV_Source">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -111,7 +112,7 @@
                                             <i class="iconfont">&#xe683;</i>
                                         </el-tooltip>
                                     :</span>
-                                    <el-slider class="form-right" v-model="ip.dev_sourceReliability" show-input></el-slider>
+                                    <el-slider class="form-right" v-model="ip.DEV_SourceReliability" show-input></el-slider>
                                 </div>
 
                             </div>
@@ -125,21 +126,21 @@
                                         <div>
                                             <div class="two-column">
                                                 <span>国家</span>
-                                                <el-select size="small" v-model="ip.geo.country" @change="changeCountry">
+                                                <el-select size="small" v-model="ip.Address.country" @change="changeCountry">
                                                     <el-option
                                                       v-for="country in countryList"
                                                       :label="country"
                                                       :value="country">
                                                     </el-option>
-                                                  </el-select>
+                                                </el-select>
                                             </div>
                                             <div class="two-column">
                                                 <span>城市</span>
-                                                <el-select size="small" v-model="ip.geo.district" >
+                                                <el-select size="small" v-model="ip.Address.district" >
                                                     <el-option
                                                       v-for="district in districtList"
-                                                      :label="district"
-                                                      :value="district">
+                                                      :label="district.name"
+                                                      :value="district.name">
                                                     </el-option>
                                                   </el-select>
                                             </div>
@@ -147,14 +148,14 @@
                                                 <span>经度</span>
                                                 <el-input size="small"
                                                   placeholder="经度"
-                                                  v-model="ip.longtitude">
+                                                  v-model="ip.Address.longtitude">
                                                 </el-input>
                                             </div>
                                             <div class="two-column">
                                                 <span>纬度</span>
                                                 <el-input class="" size="small"
                                                   placeholder="纬度"
-                                                  v-model="ip.latitude">
+                                                  v-model="ip.Address.latitude">
                                                 </el-input>
                                             </div>
 
@@ -167,7 +168,7 @@
                                     <el-input
                                       placeholder="请输入ISP"
                                       size="small"
-                                      v-model="ip.isp">
+                                      v-model="ip.ISP">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -175,7 +176,7 @@
                                     <el-input
                                       placeholder="请输入VPS"
                                       size="small"
-                                      v-model="ip.vps">
+                                      v-model="ip.VPS">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -183,7 +184,7 @@
                                     <el-input
                                       placeholder="请输入来源"
                                       size="small"
-                                      v-model="ip.geo_source">
+                                      v-model="ip.GEO_Source">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -192,7 +193,7 @@
                                             <i class="iconfont">&#xe683;</i>
                                         </el-tooltip>
                                     :</span>
-                                    <el-slider class="form-right" v-model="ip.geo_sourceReliability" show-input></el-slider>
+                                    <el-slider class="form-right" v-model="ip.GEO_SourceReliability" show-input></el-slider>
                                 </div>
                             </div>
                         </div>
@@ -205,7 +206,7 @@
                                       type="textarea"
                                       :autosize="{ minRows: 4}"
                                       placeholder="请输入内容"
-                                      v-model="ip.note">
+                                      v-model="ip.Note">
                                     </el-input>
                                 </div>
                             </div>
@@ -224,7 +225,7 @@
                       v-model="dns.dns">
                     </el-input>
                 </h3>
-                <el-form ref="ipForm" :model="dns"
+                <el-form ref="dnsForm" :model="dns"
                     <div class="card-wrapper">
                         <div class="card">
                             <span class="sub-title">whois</span>
@@ -233,20 +234,20 @@
                                     <span class="form-left">注册人 :</span>
                                     <el-input
                                       placeholder="请输入注册人信息"
-                                      v-model="dns.registerant">
+                                      v-model="dns.Registrant">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">注册邮箱 :</span>
                                     <el-input
                                       placeholder="请输入注册邮箱"
-                                      v-model="dns.regEmail">
+                                      v-model="dns.RegEmail">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">注册时间 :</span>
                                     <el-date-picker
-                                      v-model="dns.registerTime"
+                                      v-model="dns.RegTime"
                                       type="datetime"
                                       placeholder="选择日期时间">
                                     </el-date-picker>
@@ -256,7 +257,7 @@
                                     <el-input
                                       placeholder="请输入服务提供商"
                                       size="small"
-                                      v-model="dns.vps">
+                                      v-model="dns.ISP">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -264,7 +265,7 @@
                                     <el-input
                                       placeholder="请输入来源"
                                       size="small"
-                                      v-model="dns.source">
+                                      v-model="dns.WHOIS_Source">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -273,7 +274,7 @@
                                             <i class="iconfont">&#xe683;</i>
                                         </el-tooltip>
                                     :</span>
-                                    <el-slider class="form-right" v-model="dns.sourceReliability" show-input></el-slider>
+                                    <el-slider class="form-right" v-model="dns.WHOIS_SourceReliability" show-input></el-slider>
                                 </div>
                             </div>
                         </div>
@@ -286,12 +287,12 @@
                                             <i class="iconfont">&#xe683;</i>
                                         </el-tooltip>
                                     :</span>
-                                    <el-slider class="form-right" v-model="dns.credibility" show-input></el-slider>
+                                    <el-slider class="form-right" v-model="dns.Credibility" show-input></el-slider>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">发现时间 :</span>
                                     <el-date-picker
-                                      v-model="dns.discoveryTime"
+                                      v-model="dns.DiscoveryTime"
                                       type="datetime"
                                       placeholder="选择日期时间">
                                     </el-date-picker>
@@ -300,7 +301,7 @@
                                     <span class="form-left">来源 :</span>
                                     <el-input
                                       placeholder="请输入来源"
-                                      v-model="dns.whois_source">
+                                      v-model="dns.CREDIT_Source">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -309,7 +310,7 @@
                                             <i class="iconfont">&#xe683;</i>
                                         </el-tooltip>
                                     :</span>
-                                    <el-slider class="form-right" v-model="dns.whois_sourceReliability" show-input></el-slider>
+                                    <el-slider class="form-right" v-model="dns.CREDIT_SourceReliability" show-input></el-slider>
                                 </div>
                             </div>
                         </div>
@@ -323,7 +324,7 @@
                                       type="textarea"
                                       :autosize="{ minRows: 4}"
                                       placeholder="请输入内容"
-                                      v-model="dns.note">
+                                      v-model="dns.Note">
                                     </el-input>
                                 </div>
                             </div>
@@ -349,15 +350,16 @@
                             <div class="form-part">
                                 <div class="form-item">
                                     <span class="form-left">存活 :</span>
-                                    <el-radio-group size="small" v-model="url.survivability">
+                                    <el-radio-group size="small" v-model="url.Survivability">
                                       <el-radio-button label="是"></el-radio-button>
                                       <el-radio-button label="否"></el-radio-button>
+                                      <el-radio-button label="未知"></el-radio-button>
                                     </el-radio-group>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">初次发现时间 :</span>
                                     <el-date-picker
-                                      v-model="url.firstDiscoveryTime"
+                                      v-model="url.FirstDiscoveryTime"
                                       type="datetime"
                                       placeholder="选择日期时间">
                                     </el-date-picker>
@@ -367,7 +369,7 @@
                                     <el-input
                                       placeholder="请输入来源"
                                       size="small"
-                                      v-model="url.basic_source">
+                                      v-model="url.BASIC_Source">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -376,7 +378,7 @@
                                             <i class="iconfont">&#xe683;</i>
                                         </el-tooltip>
                                     :</span>
-                                    <el-slider class="form-right" v-model="url.basic_sourceReliability" show-input></el-slider>
+                                    <el-slider class="form-right" v-model="url.BASIC_SourceReliability" show-input></el-slider>
                                 </div>
                             </div>
                         </div>
@@ -385,7 +387,7 @@
                             <div class="form-part">
                                 <div class="form-item">
                                     <span class="form-left">请求方法 :</span>
-                                    <el-select size="small" v-model="url.requestMethod" multiple>
+                                    <el-select size="small" v-model="url.RequestMethod" multiple>
                                         <el-option
                                           v-for="item in locals.methods"
                                           :label="item"
@@ -395,7 +397,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">webshell类型 :</span>
-                                    <el-select size="small" v-model="url.webshellType" multiple>
+                                    <el-select size="small" v-model="url.WebshellName" multiple>
                                         <el-option
                                           v-for="item in serverInfo.webshellTypes"
                                           :label="item"
@@ -406,15 +408,15 @@
                                 <div class="form-item">
                                     <span class="form-left">webshell所属页面名称 :</span>
                                     <el-input
-                                      placeholder="请输入来源"
-                                      v-model="url.pageName">
+                                      placeholder="请输入所属页面名称"
+                                      v-model="url.Title">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">来源 :</span>
                                     <el-input
                                       placeholder="请输入来源"
-                                      v-model="url.ws_source">
+                                      v-model="url.WS_Source">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -423,7 +425,7 @@
                                             <i class="iconfont">&#xe683;</i>
                                         </el-tooltip>
                                     :</span>
-                                    <el-slider class="form-right" v-model="url.ws_sourceReliability" show-input></el-slider>
+                                    <el-slider class="form-right" v-model="url.WS_SourceReliability" show-input></el-slider>
                                 </div>
                             </div>
                         </div>
@@ -437,7 +439,7 @@
                                       type="textarea"
                                       :autosize="{ minRows: 4}"
                                       placeholder="请输入内容"
-                                      v-model="url.note">
+                                      v-model="url.Note">
                                     </el-input>
                                 </div>
                             </div>
@@ -449,6 +451,7 @@
                     </div>
                 </el-form>
             </div>
+            <library :callback="handleEventSave"></library>
         </div>
     </div>
 
@@ -457,121 +460,130 @@
 </template>
 
 <script>
-import { sections,methods } from '../../const/constants';
+
+import { sections,methods } from '../../const/constants'
 import { serverUrl }from '../../const/url'
+import util from '../utils/util'
+import localServerInfo from '../../static/constants'
+import geo from '../../static/constants_loc'
+import Library from './info-typein2.vue';
 
 
 export default {
+
   data(){
     return {
         locals:{
             sections,
-            methods
+            methods,
         },
         serverInfo:{
-            protocols:[],
-            osList:[],
-            geo: [],
+            ...localServerInfo,
+            geo,
+
+            // protocols: localServerInfo.protocols,
+            // osList:[],
+            // geo: [],
             webshellTypes:[]
         },
         fullscreenLoading: false,
         ip:{
             ip: '',
-            credibility: 0,
-            discoveryTime: '',
-            survivability: '是',
-            credit_source: '',
-            credit_sourceReliability: 0,
+            Credibility: 0,
+            DiscoveryTime: '',
+            Survivability: '未知',
+            CREDIT_Source: '',
+            CREDIT_SourceReliability: 0,
 
-            protocals:[],
-            os:'',
-            portList:[],
-            dev_source: '',
-            dev_sourceReliability: 0,
+            Protocol:[],
+            OS:'',
+            Port:[],
+            DEV_Source: '',
+            DEV_SourceReliability: 0,
 
-            isp: '',
-            vps: '',
-            geo_source: '',
-            geo_sourceReliability: 0,
-            geo:{
+            ISP: '',
+            VPS: '',
+            GEO_Source: '',
+            GEO_SourceReliability: 0,
+            Address:{
                 country:'',
                 district: '',
                 longtitude: '',
                 latitude: ''
             },
-            note:''
+            Note:''
 
         },
         dns:{
             dns:'',
-            credibility: 0,
-            discoveryTime: '',
-            credit_source: '',
-            credit_sourceReliability: 0,
+            Credibility: 0,
+            DiscoveryTime: '',
+            CREDIT_Source: '',
+            CREDIT_SourceReliability: 0,
 
             Registrant: '',
             RegEmail: '',
             RegTime: '',
             ISP: '',
-            whois_source: '',
-            whois_sourceReliability: 0,
+            WHOIS_Source: '',
+            WHOIS_SourceReliability: 0,
 
-            note:''
+            Note:''
 
         },
 
         url:{
             url: '',
-            firstDiscoveryTime: '',
-            actionTags: [],
-            basic_source: '',
-            basic_sourceReliability: 0,
-            survivability: '是',
+            FirstDiscoveryTime: '',
+            ActionTag: [],
+            BASIC_Source: '',
+            BASIC_SourceReliability: 0,
+            Survivability: '未知',
 
-            requestMethod: '',
-            webshellFile: '',
-            webshellType: '',
-            ws_source: '',
-            ws_sourceReliability: 0,
-            pageName:'',
-            originalFile: '',
-            note:''
+            RequestMethod: '',
+            Title:'',
+            WebshellName: '',
+            WebshellFile: '',
+            WS_Source: '',
+            WS_SourceReliability: 0,
+            Note:''
         }
     }
   },
   computed:{
     transformedGeo(){
-        return this.serverInfo.geo.reduce((prev,countryInfo)=>{
-            prev[countryInfo.country] = countryInfo.district;
-            return prev;
-        },{});
+        if(this.serverInfo.geo)
+            return this.serverInfo.geo.reduce((prev,countryInfo)=>{
+                prev[countryInfo.name] = countryInfo.children;
+                return prev;
+            },{});
     },
     countryList(){
         return Object.keys(this.transformedGeo);
     },
     districtList(){
-        const choice = this.ip.geo.country;
+        const choice = this.ip.Address.country;
         return this.transformedGeo[choice];
     }
   },
 
   mounted(){
     // this.fullscreenLoading = true;
-    axios.get(serverUrl.serverInfo)
-        .then(response=> {
-            // debugger;
-            this.fullscreenLoading = false;
-            this.serverInfo = response.data;
-        })
-        .catch(err=>{
-            console.log(err);
-            this.fullscreenLoading = false;
-            this.$message({message: "获取服务器数据失败，请刷新",type:'warning'});
-        })
+    // axios.get(serverUrl.serverInfo)
+    //     .then(response=> {
+    //         // debugger;
+    //         this.fullscreenLoading = false;
+    //         this.serverInfo = response.data;
+    //     })
+    //     .catch(err=>{
+    //         console.log(err);
+    //         this.fullscreenLoading = false;
+    //         this.$message({message: "获取服务器数据失败，请刷新",type:'warning'});
+    //     })
 
   },
   components: {
-
+    'library': Library
   },
   methods:{
     scrollTo(hash){
@@ -585,12 +597,21 @@ export default {
 
     },
     changeCountry(){
-        this.ip.geo.district = '';
+        this.ip.Address.district = '';
     },
     onSaveTargetForm(target){
         let {[target]:targetValue,...postBody} = this[target];
+
+        Object.keys(postBody).forEach(key=>{
+          if(key.match(/Time/)){
+            postBody[key] = util.formatTimeStr(postBody[key]);
+          }
+        });
+
         axios.post(serverUrl.createInfo,{
-            [targetValue]:postBody
+            [target]:{
+                    [targetValue]: postBody
+                }
         })
         .then(response=> {
             this.$message({message: `提交${target}成功`,type:'success'});
@@ -603,21 +624,9 @@ export default {
     onSaveIpForm(target){
 
         this.onSaveTargetForm(target);
-        /*
-        let {ip,...postBody} = this.ip;
-        axios.post(serverUrl.createInfo,{
-            [ip]:postBody
-        })
-        .then(response=> {
-            this.$message({message: "提交ip成功",type:'success'});
-
-        })
-        .catch(err=>{
-            console.log(err);
-            this.$message({message: "创建ip失败",type:'error'});
-        });
-        console.log(this.ip);
-        */
+    },
+    handleEventSave(){
+        console.log("------test event");
     }
   }
 };

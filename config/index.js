@@ -23,7 +23,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/ip/serverInfo': {
-            target: 'http://10.10.20.140:8089',
+            target: 'http://10.10.20.213:8089',
             // target: 'https://cnodejs.org',
             pathRewrite:{'^(/ip/serverInfo)': '$1'},
             // pathRewrite:{'^/ip/serverInfo': '/api/v1/topics'},
