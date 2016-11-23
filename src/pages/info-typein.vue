@@ -469,6 +469,72 @@ import geo from '../../static/constants_loc'
 import Library from './info-typein2.vue';
 
 
+const initObj = {
+  ip:{
+            ip: '',
+            Credibility: null,
+            DiscoveryTime: null,
+            Survivability: '未知',
+            CREDIT_Source: '',
+            CREDIT_SourceReliability: null,
+
+            Protocol:[],
+            OS:'',
+            Port:[],
+            DEV_Source: '',
+            DEV_SourceReliability: null,
+
+            ISP: '',
+            VPS: '',
+            GEO_Source: '',
+            GEO_SourceReliability: null,
+            Address:{
+                country:'',
+                district: '',
+                longtitude: '',
+                latitude: ''
+            },
+            Note:''
+
+        },
+        dns:{
+            dns:'',
+            Credibility: null,
+            DiscoveryTime: '',
+            CREDIT_Source: '',
+            CREDIT_SourceReliability: null,
+
+            Registrant: '',
+            RegEmail: '',
+            RegTime: null,
+            ISP: '',
+            WHOIS_Source: '',
+            WHOIS_SourceReliability: null,
+
+            Note:''
+
+        },
+
+        url:{
+            url: '',
+            FirstDiscoveryTime: null,
+            ActionTag: [],
+            BASIC_Source: '',
+            BASIC_SourceReliability: null,
+            Survivability: '未知',
+
+            RequestMethod: '',
+            Title:'',
+            WebshellName: '',
+            WebshellFile: '',
+            WS_Source: '',
+            WS_SourceReliability: null,
+            Note:''
+        }
+}
+
+// const formData = {...initObj};
+
 export default {
 
   data(){
@@ -486,68 +552,12 @@ export default {
             // geo: [],
             webshellTypes:[]
         },
+        ip: {...initObj.ip},
+        url: {...initObj.url},
+        dns: {...initObj.dns},
+
         fullscreenLoading: false,
-        ip:{
-            ip: '',
-            Credibility: 0,
-            DiscoveryTime: '',
-            Survivability: '未知',
-            CREDIT_Source: '',
-            CREDIT_SourceReliability: 0,
 
-            Protocol:[],
-            OS:'',
-            Port:[],
-            DEV_Source: '',
-            DEV_SourceReliability: 0,
-
-            ISP: '',
-            VPS: '',
-            GEO_Source: '',
-            GEO_SourceReliability: 0,
-            Address:{
-                country:'',
-                district: '',
-                longtitude: '',
-                latitude: ''
-            },
-            Note:''
-
-        },
-        dns:{
-            dns:'',
-            Credibility: 0,
-            DiscoveryTime: '',
-            CREDIT_Source: '',
-            CREDIT_SourceReliability: 0,
-
-            Registrant: '',
-            RegEmail: '',
-            RegTime: '',
-            ISP: '',
-            WHOIS_Source: '',
-            WHOIS_SourceReliability: 0,
-
-            Note:''
-
-        },
-
-        url:{
-            url: '',
-            FirstDiscoveryTime: '',
-            ActionTag: [],
-            BASIC_Source: '',
-            BASIC_SourceReliability: 0,
-            Survivability: '未知',
-
-            RequestMethod: '',
-            Title:'',
-            WebshellName: '',
-            WebshellFile: '',
-            WS_Source: '',
-            WS_SourceReliability: 0,
-            Note:''
-        }
     }
   },
   computed:{
@@ -599,14 +609,41 @@ export default {
     changeCountry(){
         this.ip.Address.district = '';
     },
+    reset(key){
+      this[key] = initObj[key];
+    },
+    beforeSubmit(data){
+
+      // for(let[key,value] of data){
+      //   if(!util.isValidInput(value))
+      //     delete data[key];
+      // }
+      Object.keys(data).forEach(key=>{
+        const value = data[key];
+        if(!util.isValidInput(value))
+          delete data[key];
+        else{
+          //transform时间
+          if(key.match(/Time/)){
+            data[key] = util.formatTimeStr(data[key]);
+          }
+        }
+
+      });
+
+      //transform时间
+      // Object.keys(data).forEach(key=>{
+      //     if(key.match(/Time/)){
+      //       data[key] = util.formatTimeStr(data[key]);
+      //     }
+      // });
+      return data;
+    },
     onSaveTargetForm(target){
         let {[target]:targetValue,...postBody} = this[target];
 
-        Object.keys(postBody).forEach(key=>{
-          if(key.match(/Time/)){
-            postBody[key] = util.formatTimeStr(postBody[key]);
-          }
-        });
+
+        postBody = this.beforeSubmit(postBody);
 
         axios.post(serverUrl.createInfo,{
             [target]:{
@@ -614,6 +651,7 @@ export default {
                 }
         })
         .then(response=> {
+            this.reset(target);
             this.$message({message: `提交${target}成功`,type:'success'});
         })
         .catch(err=>{

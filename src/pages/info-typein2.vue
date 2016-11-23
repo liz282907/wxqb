@@ -3,7 +3,7 @@
                 <h3 class="title">安全事件 :
                     <el-input
                       placeholder="请输入事件名称"
-                      v-model="event.eventName">
+                      v-model="event.event">
                     </el-input>
                 </h3>
                 <el-form ref="eventForm" :model="event"
@@ -15,7 +15,7 @@
                                 <div class="form-item">
                                     <span class="form-left">攻击时间 :</span>
                                     <el-date-picker
-                                      v-model="event.attackTime"
+                                      v-model="event.AttackTime"
                                       type="daterange"
                                       placeholder="选择日期范围"
                                       style="width: 220px">
@@ -215,21 +215,13 @@
 import { sections,methods } from '../../const/constants';
 import { serverUrl }from '../../const/url'
 
+import util from '../utils/util'
 
-export default {
-  props:{
-    callback: {
-      type: Function
-    }
-  },
-  data(){
-    return {
-        locals:{
-            sections,
-        },
-        event:{
+
+const event = {
+          event:'',
           AttactName:'',
-          AttackTime: '',
+          AttackTime: [],
           // DangerClass: '',
           AuthorityCode:'',
           AuthorityName: '',
@@ -256,7 +248,24 @@ export default {
           Evaluate:0,
           Note:'',
 
+}
+
+const initObj = {
+  event,
+}
+
+export default {
+  props:{
+    callback: {
+      type: Function
+    }
+  },
+  data(){
+    return {
+        locals:{
+            sections,
         },
+        event:{...initObj.event},
 
         fullscreenLoading: false,
 
@@ -276,6 +285,18 @@ export default {
 
     onSaveTargetForm(target){
         let {[target]:targetValue,...postBody} = this[target];
+
+        Object.keys(postBody).forEach(key=>{
+          if(key.match(/Time/)){
+            const val = postBody[key];
+            if(typeof val === 'string')
+              postBody[key] = util.formatTimeStr(postBody[key]);
+            else if(Array.isArray(val)){
+              postBody[key] = val.map(str=>util.formatTimeStr(str))
+            }
+          }
+        });
+
         axios.post(serverUrl.createInfo,{
           [target]:{
             [targetValue]:postBody
@@ -283,11 +304,14 @@ export default {
         })
         .then(response=> {
             this.$message({message: `提交${target}成功`,type:'success'});
+            this[target] = initObj[target];
         })
         .catch(err=>{
             console.log(err);
+
             this.$message({message: `创建${target}失败`,type:'error'});
         });
+
         if(this.callback)
           this.callback();
     },

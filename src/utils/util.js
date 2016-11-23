@@ -11,4 +11,10 @@ const formatTimeStr = (d)=> format(formatTime('YYYY-MM-DD hh:mm:ss'))(d);
 
 // format(formatTime('YYYY-MM-DD hh:mm'))(new Date());
 
-export default{ format, formatTimeStr}
+function isValidInput(input){
+    return !['',[],undefined,null].some(invalidStr=> {
+        return invalidStr===input|| (Array.isArray(input) && input.length===0);
+    });
+}
+
+export default{ format, formatTimeStr,isValidInput}
