@@ -2,7 +2,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <svg xmlns="http://www.w3.org/2000/svg">
 <metadata>
-Created by FontForge 20120731 at Tue Nov  8 17:50:35 2016
+Created by FontForge 20120731 at Mon Jan  2 14:01:35 2017
  By admin
 </metadata>
 <defs>
@@ -37,6 +37,10 @@ t-29.5 0.5h-32l-45 128h-439l-44 -128h-29h-34q-20 0 -45 1q-25 0 -41 9.5t-25.5 23t
 t9.5 -10.5t21.5 -4h37h67h81h80h64h36q23 0 34 12t2 38q-5 13 -9.5 30.5t-9.5 34.5q-5 19 -11 39h-368zM336 498v228q0 11 2.5 23t10 21.5t20.5 15.5t34 6h188q31 0 51.5 -14.5t20.5 -52.5v-227h-327z" />
     <glyph glyph-name="houtui" unicode="&#xe600;" 
 d="M532 446h-7v143q0 40 -20 54t-48 -9l-352 -283q-28 -22 -28 -54.5t28 -55.5l349 -280q29 -21 50 -5.5t21 50.5v151h53q232 0 341 -193q6 -11 13 -14t11 1t4 13q-1 84 -35.5 171t-90 155.5t-132.5 112t-157 43.5z" />
+    <glyph glyph-name="tianjia" unicode="&#xe601;" 
+d="M896 236h-320v-320h-128v320h-320v128h320v320h128v-320h320v-128z" />
+    <glyph glyph-name="delete" unicode="&#xe627;" 
+d="M809 81l-78 -78l-219 219l-219 -219l-78 78l219 219l-219 219l78 78l219 -219l219 219l78 -78l-219 -219z" />
     <glyph glyph-name="jiantouxia" unicode="&#xe62a;" 
 d="M341 471l-85 -86l255 -256l257 256l-85 86l-171 -171z" />
     <glyph glyph-name="msnui-trash" unicode="&#xe618;" 

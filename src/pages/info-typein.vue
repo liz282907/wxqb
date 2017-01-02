@@ -47,9 +47,9 @@
                                 <div class="form-item">
                                     <span class="form-left">存活 :</span>
                                     <el-radio-group size="small" v-model="ip.Survivability">
-                                      <el-radio-button label="是"></el-radio-button>
-                                      <el-radio-button label="否"></el-radio-button>
-                                      <el-radio-button label="未知"></el-radio-button>
+                                      <el-radio-button :label="1" >是</el-radio-button>
+                                      <el-radio-button :label="0" >否</el-radio-button>
+                                      <el-radio-button :label="-1" >未知</el-radio-button>
                                     </el-radio-group>
                                 </div>
                                 <div class="form-item">
@@ -94,8 +94,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">开放端口 : </span>
-                                    <el-input placeholder="请输入端口号" size="small">
-                                        v-model="ip.Port"
+                                    <el-input placeholder="请输入端口号" size="small" v-model="ip.Port">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
@@ -351,9 +350,9 @@
                                 <div class="form-item">
                                     <span class="form-left">存活 :</span>
                                     <el-radio-group size="small" v-model="url.Survivability">
-                                      <el-radio-button label="是"></el-radio-button>
-                                      <el-radio-button label="否"></el-radio-button>
-                                      <el-radio-button label="未知"></el-radio-button>
+                                      <el-radio-button :label="1" >是</el-radio-button>
+                                      <el-radio-button :label="0" >否</el-radio-button>
+                                      <el-radio-button :label="-1" >未知</el-radio-button>
                                     </el-radio-group>
                                 </div>
                                 <div class="form-item">
@@ -474,13 +473,13 @@ const initObj = {
             ip: '',
             Credibility: null,
             DiscoveryTime: null,
-            Survivability: '未知',
+            Survivability: -1,
             CREDIT_Source: '',
             CREDIT_SourceReliability: null,
 
             Protocol:[],
             OS:'',
-            Port:[],
+            Port:'',
             DEV_Source: '',
             DEV_SourceReliability: null,
 
@@ -521,7 +520,7 @@ const initObj = {
             ActionTag: [],
             BASIC_Source: '',
             BASIC_SourceReliability: null,
-            Survivability: '未知',
+            Survivability: -1,
 
             RequestMethod: '',
             Title:'',
@@ -645,6 +644,7 @@ export default {
 
         postBody = this.beforeSubmit(postBody);
 
+        debugger;
         axios.post(serverUrl.createInfo,{
             [target]:{
                     [targetValue]: postBody

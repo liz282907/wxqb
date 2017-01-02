@@ -19,7 +19,12 @@
         <el-dropdown-menu slot="dropdown" >
           <el-dropdown-item @click.native="logOut"
             v-if="isLogined">退出</el-dropdown-item>
-            <el-dropdown-item v-else >登录</el-dropdown-item>
+          <el-dropdown-item v-else >登录</el-dropdown-item>
+          <el-dropdown-item >
+              <router-link  to="/app/toolbox" >
+            工具栏
+          </router-link>
+          </el-dropdown-item>
         </el-dropdown-menu>
     </el-dropdown>
     </div>

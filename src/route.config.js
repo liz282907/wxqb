@@ -54,7 +54,8 @@ let route = [
             ]
         },
         { path: 'searchResult', name: 'search_result', component: search_result },
-        { path: 'vis', name: 'vis', component: vis }
+        { path: 'vis', name: 'vis', component: vis },
+        { path: 'toolbox', name: 'toolbox', component: require('./pages/tool-for-dev.vue') }
         ]
     },
     { path: 'search', name: 'search', component: search },
