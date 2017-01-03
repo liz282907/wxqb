@@ -2,7 +2,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <svg xmlns="http://www.w3.org/2000/svg">
 <metadata>
-Created by FontForge 20120731 at Mon Jan  2 14:01:35 2017
+Created by FontForge 20120731 at Tue Jan  3 10:42:17 2017
  By admin
 </metadata>
 <defs>
@@ -41,6 +41,11 @@ d="M532 446h-7v143q0 40 -20 54t-48 -9l-352 -283q-28 -22 -28 -54.5t28 -55.5l349 -
 d="M896 236h-320v-320h-128v320h-320v128h320v320h128v-320h320v-128z" />
     <glyph glyph-name="delete" unicode="&#xe627;" 
 d="M809 81l-78 -78l-219 219l-219 -219l-78 78l219 219l-219 219l78 78l219 -219l219 219l78 -78l-219 -219z" />
+    <glyph glyph-name="bianji" unicode="&#xe602;" 
+d="M784 525l-126 126l63 63q15 15 37.5 15t37.5 -15l51 -51q15 -15 15 -37.5t-15 -37.5zM418 159l-126 126l342 340l126 -126zM191 56l77 205l124 -125zM756 13q14 0 23 -9.5t9 -22.5t-9 -22.5t-23 -9.5h-564q-13 0 -22 9.5t-9 22.5t9 22.5t22 9.5h564z" />
+    <glyph glyph-name="shanchu" unicode="&#xe63d;" 
+d="M513 748q92 0 175 -35.5t143 -95.5t95 -143t35 -175t-36 -175t-96 -142.5t-144 -94.5t-176 -35q-91 0 -173.5 36t-142.5 96t-95 143t-35 174t35.5 174t96 143t143.5 95t175 35zM511 -37q93 -1 170.5 43.5t122.5 121.5t46 170q0 93 -44.5 171.5t-122.5 123.5t-171 45
+q-92 0 -169.5 -45t-122.5 -122t-46 -169q0 -93 44.5 -171t122 -123t170.5 -45zM735 244h-223.5h-222.5v111h222h224v-111z" />
     <glyph glyph-name="jiantouxia" unicode="&#xe62a;" 
 d="M341 471l-85 -86l255 -256l257 256l-85 86l-171 -171z" />
     <glyph glyph-name="msnui-trash" unicode="&#xe618;" 

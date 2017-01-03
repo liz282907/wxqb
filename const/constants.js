@@ -49,20 +49,10 @@ const defaultWigets = [
         type: 'select',
         name: '下拉菜单1',
         modelName: 'select2',
-        options:[
-            {
-                label: '选项1',
-                value: 'value1'
-            },
-            {
-                label: '选项2',
-                value: 'value2'
-            },
-            {
-                label: '选项3',
-                value: 'value3'
-            }
-        ]
+        options:{
+            labels:'选项1,选项2,选项3',
+            values:'value1,value2,value3'
+        }
     },
     {
         type: 'slider',

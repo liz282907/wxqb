@@ -4,7 +4,7 @@
 
         </div>
         <div class="tool-main">
-            <div ref="wigets" v-for="(wiget,index) in wigets">
+            <div ref="wigets" v-for="(wiget,index) in wigetList" class="row">
                 <div class="form-item" v-if="wiget.type==='input' ">
                     <span class="form-left">{{wiget.name}}</span>
                     <el-input
@@ -43,9 +43,13 @@
                       placeholder="选择日期时间">
                     </el-date-picker>
                 </div>
+                <div class="actions-group">
+                    <span @click="editWiget(index)"><i class="iconfont icon-bianji"></i></span>
+                    <span @click="deleteWiget(index)"><i class="iconfont icon-shanchu"></i></span>
+                </div>
             </div>
             <div>
-                <span><i class="iconfont icon-tianjia" @click="dialogFormVisible = true"></i></span>
+                <span><i class="iconfont icon-tianjia" @click="showAndAdd"></i></span>
             </div>
         </div>
 
@@ -76,7 +80,7 @@
                         <div class="form-item" >
                             <el-input
                             placeholder="各选项显示值(中文)，逗号分隔"
-                          v-model="tool.select.options.keys">
+                          v-model="tool.select.options.labels">
                         </el-input>
                         </div>
                         <div class="form-item" >
@@ -112,7 +116,8 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="addElement">添加</el-button>
+                <el-button type="primary" v-if="isEditing" @click="updateWiget">更新</el-button>
+                <el-button type="primary" v-else @click="addWiget">添加</el-button>
             </div>
         </el-dialog>
 
@@ -168,42 +173,87 @@ export default {
   props:['serverInfo'],
   data(){
     return {
+        isEditing: false,
         dialogFormVisible:false,
         wigets: [...defaultWigets],
         tool:{...tool},
         currentView: null,
     }
   },
+
+  computed:{
+    wigetList(){
+        return this.wigets.map(wiget=>{
+            const type = wiget.type;
+            if(wiget.type==='select'){
+                console.log(wiget)
+                let {options,...others} = {...wiget};
+                const valueArr = wiget.options.values.split(',');
+                console.log(options)
+                return {
+                    ...others,
+                    options: options.labels.split(',').reduce((prev,cur,index)=>{
+                                prev.push({label:cur,value:valueArr[index]});
+                                return prev;
+                            },[])
+                }
+            }
+            else return wiget;
+        })
+    }
+  },
+
   methods:{
     toggleWiget(choice){
         console.log(choice)
         // this.currentView = choiceDict[choice];
     },
-    addElement(){
+    addWiget(){
         const type = this.tool.type;
-        let added;
 
-        const commonParts = {
+        const added = {
             modelName: type+(this.wigets.length),
             name: this.tool.name,
             type: this.tool.type,
+            ...this.tool[type]
         }
-        if(type==='select'){
-            const options = this.tool[type].options;
-            const valueArr = options.values.split(',')
-            added = {
-                ...commonParts,
-                options: options.keys.split(',').reduce((prev,cur,index)=>{
-                            prev.push({label:cur,value:valueArr[index]});
-                            return prev;
-                        },[])
-            }
-        }
-        else added = {...commonParts,...this.tool[type]};
 
         this.wigets.push(added);
         this.tool = {...tool};
-        this.dialogFormVisible = false;
+        this.toggleDialog(false);
+
+    },
+    deleteWiget(index){
+        this.wigets.splice(index,1);
+    },
+    //更新按钮
+    updateWiget(index){
+        const {type,name,labelWidth,...others} = {...this.tool};
+        const cur = {
+            type,
+            name,
+            ...others[type]
+        }
+        if(JSON.stringify(this.wigets[index])!==JSON.stringify(cur))
+            this.wigets.splice(index,1,Object.assign({},this.wigets[index],cur));
+        this.toggleDialog(false);
+
+    },
+    toggleDialog(state){
+        this.dialogFormVisible = state;
+    },
+    editWiget(index){
+        this.isEditing = true;
+        const {type,modelName,name,...setting} = this.wigets[index];
+        this.tool.type = type;
+        this.tool.name = name;
+        this.tool[type] = setting
+        this.toggleDialog(true);
+    },
+    showAndAdd(){
+        this.tool = {...tool};
+        this.isEditing = false;
+        this.toggleDialog(true);
 
     }
   }
@@ -211,6 +261,7 @@ export default {
 </script>
 
 <style lang='scss'>
+
 
 .my-tool-container{
     width: 100%;
@@ -220,6 +271,30 @@ export default {
         overflow: auto;
         background-color: white;
         padding: 50px;
+    }
+}
+.row{
+    display: flex;
+    vertical-align: middle;
+    .actions-group{
+
+        margin-left: 20px;
+        width: 20%;
+        line-height: 36px;
+        display: flex;
+        span{
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            .iconfont{
+                font-size: 20px;
+            }
+
+
+        }
+    }
+    .form-item{
+        flex: 1;
     }
 }
 .form-item{

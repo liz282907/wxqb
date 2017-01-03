@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1483336895630'); /* IE9*/
-  src: url('iconfont.eot?t=1483336895630#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1483336895630') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1483336895630') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1483336895630#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1483411337861'); /* IE9*/
+  src: url('iconfont.eot?t=1483411337861#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1483411337861') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1483411337861') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1483411337861#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -20,6 +20,10 @@
 .icon-tianjia:before { content: "\e601"; }
 
 .icon-delete:before { content: "\e627"; }
+
+.icon-bianji:before { content: "\e602"; }
+
+.icon-shanchu:before { content: "\e63d"; }
 
 .icon-jiantouxia:before { content: "\e62a"; }
 
