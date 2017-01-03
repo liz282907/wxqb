@@ -4,39 +4,44 @@
 
         </div>
         <div class="tool-main">
-            <div ref="wigets">
-                <div class="form-item">
-                    <span class="form-left">输入框 :</span>
+            <div ref="wigets" v-for="(wiget,index) in wigets">
+                <div class="form-item" v-if="wiget.type==='input' ">
+                    <span class="form-left">{{wiget.name}}</span>
                     <el-input
-                      placeholder="请输入"
-                      v-model="input1">
+                      :placeholder="wiget.placeholder"
+                      v-model="wiget.modelName">
                     </el-input>
                 </div>
-                <div class="form-item">
-                    <span class="form-left">datepicker :</span>
-                    <el-date-picker
-                      v-model="datepicker1"
-                      type="datetime"
-                      placeholder="选择日期时间">
-                    </el-date-picker>
+
+                <div class="form-item" v-if="wiget.type==='select' ">
+                    <span class="form-left">{{wiget.name}}</span>
+                     <el-select size="small" v-model="wiget.modelName">
+                        <el-option
+                          v-for="item in wiget.options"
+                          :label="item.label"
+                          :value="item.value">
+                        </el-option>
+                      </el-select>
                 </div>
-                <div class="form-item">
-                    <span class="form-left">slider
-                        <el-tooltip class="item" effect="dark" content="0-30：不可靠；31-75：比较可靠；76-100：可靠" placement="top-start">
+
+                <div class="form-item" v-if="wiget.type==='slider' ">
+                    <span class="form-left">{{wiget.name}}
+                        <el-tooltip class="item" effect="dark" :content="wiget.tooltip" placement="top-start">
                             <i class="iconfont">&#xe683;</i>
                         </el-tooltip>
                     :</span>
-                    <el-slider class="form-right" v-model="slider1" show-input></el-slider>
+                    <el-slider class="form-right" v-model="wiget.modelName" show-input
+                        :min="wiget.min"
+                        :max="wiget.max"
+                    ></el-slider>
                 </div>
-                <div class="form-item">
-                    <span class="form-left">下拉框 : </span>
-                     <el-select size="small" v-model="select1" multiple>
-                        <el-option
-                          v-for="item in options"
-                          :label="item"
-                          :value="item">
-                        </el-option>
-                      </el-select>
+                <div class="form-item" v-if="wiget.type==='datepicker' ">
+                    <span class="form-left">{{wiget.name}}</span>
+                    <el-date-picker class="form-right"
+                      v-model="wiget.modelName"
+                      type="datetime"
+                      placeholder="选择日期时间">
+                    </el-date-picker>
                 </div>
             </div>
             <div>
@@ -70,25 +75,38 @@
                     <el-form-item label="备选项" :label-width="tool.labelWidth" v-if=" tool.type==='select' ">
                         <div class="form-item" >
                             <el-input
-                            placeholder="逗号分隔"
-                          v-model="tool.select.options">
+                            placeholder="各选项显示值(中文)，逗号分隔"
+                          v-model="tool.select.options.keys">
+                        </el-input>
+                        </div>
+                        <div class="form-item" >
+                            <el-input
+                            placeholder="各选项真实值(英文)，逗号分隔"
+                          v-model="tool.select.options.values">
                         </el-input>
                         </div>
                     </el-form-item>
-                    <el-form-item label="范围" :label-width="tool.labelWidth" v-if=" tool.type==='slider' ">
-                        <div class="form-item" >
-                            <el-input v-model="tool.slider.tooltip"></el-input>
-                            <el-input
-                              v-model="tool.slider.min">
-                            </el-input>
-                            ——
-                            <el-input
-                              v-model="tool.slider.max">
-                            </el-input>
-                        </div>
-                    </el-form-item>
+                    <div>
+                        <el-form-item label="评分说明文字" :label-width="tool.labelWidth" v-if=" tool.type==='slider' ">
+                            <div class="form-item" >
+                                <el-input v-model="tool.slider.tooltip"></el-input>
+                            </div>
+                        </el-form-item>
+                        <el-form-item label="范围" :label-width="tool.labelWidth" v-if=" tool.type==='slider' ">
+                            <div class="form-item" >
+                                <el-input
+                                  v-model="tool.slider.min">
+                                </el-input>
+                                ——
+                                <el-input
+                                  v-model="tool.slider.max">
+                                </el-input>
+                            </div>
+                        </el-form-item>
+
+                    </div>
                     <!-- <component :is='currentView'></component> -->
-                </el-form-item>
+                <!-- </el-form-item> -->
                 </div>
 
             </el-form>
@@ -103,18 +121,37 @@
 </template>
 
 <script>
-import util from '../utils/util'
+// import util from '../utils/util'
+import { defaultWigets } from '../../const/constants'
+
+const tool = {
+            labelWidth: '120px',
+            type:'',
+            name:'',
+            input:{
+                placeholder:''
+            },
+            select:{
+                options:{}
+            },
+            slider:{
+                tooltip:'',
+                min: 0,
+                max: 100
+            }
+        };
 
 const options = ['option1','option2','option3']
-const tplInput = {
-    template:  `<div class="form-item">
-                    <span class="form-left"> 提示:</span>
-                    <el-input
-                      v-model="tool.input.placeholder">
-                    </el-input>
-                </div>`,
-}
-const choiceDict = {input:tplInput}
+// const tplInput = {
+//     template:  `<div class="form-item">
+//                     <span class="form-left"> 提示:</span>
+//                     <el-input
+//                       v-model="tool.input.placeholder">
+//                     </el-input>
+//                 </div>`,
+// }
+// const choiceDict = {input:tplInput}
+
 
 
 
@@ -132,44 +169,41 @@ export default {
   data(){
     return {
         dialogFormVisible:false,
-        tool:{
-            labelWidth: '120px',
-            type:'',
-            name:'',
-            input:{
-                placeholder:''
-            },
-            select:{
-                options:''
-            },
-            slider:{
-                tooltip:'',
-                min: 0,
-                max: 100
-            }
-        },
-        count: 3,
+        wigets: [...defaultWigets],
+        tool:{...tool},
         currentView: null,
-
-        input1:'',
-        options,
-        select1:'',
-        datepicker1:'',
-        slider1:0
     }
   },
   methods:{
     toggleWiget(choice){
         console.log(choice)
-        this.currentView = choiceDict[choice];
+        // this.currentView = choiceDict[choice];
     },
     addElement(){
-        this.count++;
         const type = this.tool.type;
-        // debugger
-        const wiget = util.generateTemplate(type,{...this.tool[type]},this.count);
-        this.$refs.wigets.appendChild(wiget);
-        // debugger;
+        let added;
+
+        const commonParts = {
+            modelName: type+(this.wigets.length),
+            name: this.tool.name,
+            type: this.tool.type,
+        }
+        if(type==='select'){
+            const options = this.tool[type].options;
+            const valueArr = options.values.split(',')
+            added = {
+                ...commonParts,
+                options: options.keys.split(',').reduce((prev,cur,index)=>{
+                            prev.push({label:cur,value:valueArr[index]});
+                            return prev;
+                        },[])
+            }
+        }
+        else added = {...commonParts,...this.tool[type]};
+
+        this.wigets.push(added);
+        this.tool = {...tool};
+        this.dialogFormVisible = false;
 
     }
   }
