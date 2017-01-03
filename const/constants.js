@@ -43,12 +43,14 @@ const defaultWigets = [
         type: 'input',
         modelName: 'input1',
         name: '输入框1',
+        field: 'ip',
         placeholder:'',
     },
     {
         type: 'select',
         name: '下拉菜单1',
         modelName: 'select2',
+        field:'OS',
         options:{
             labels:'选项1,选项2,选项3',
             values:'value1,value2,value3'
@@ -57,6 +59,7 @@ const defaultWigets = [
     {
         type: 'slider',
         modelName: 'slider3',
+        field:'Credibility',
         name: '等级bar',
         tooltip: '0-30：低；31-75：中；76-100：高',
         min:0,
@@ -65,4 +68,12 @@ const defaultWigets = [
 ]
 
 
-export { navList,sections,methods,defaultWigets };
+const wigetsOfIp = '[{"type":"input","modelName":"input1","name":"互联网提供商","placeholder":"","field":"ISP","input":{"placeholder":""},"select":{"options":{"labels":"HTTP,FTP","values":"HTTP,FTP"}},"slider":{"tooltip":"","min":0,"max":100}},{"type":"select","name":"操作系统标识","modelName":"select2","options":{"labels":"选项1,选项2,选项3","values":"value1,value2,value3"},"field":"OS","input":{"placeholder":""},"select":{"options":{"labels":"选项1,选项2,选项3","values":"value1,value2,value3"}},"slider":{"tooltip":"","min":0,"max":100}},{"type":"slider","modelName":0,"name":"信誉度","tooltip":"0-30：低；31-75：中；76-100：高","min":0,"max":100,"field":"Credibility","input":{"placeholder":""},"select":{"options":{"labels":"HTTP,FTP","values":"HTTP,FTP"}},"slider":{"tooltip":"0-30：低；31-75：中；76-100：高","min":0,"max":100}},{"modelName":"input3","name":"所属机构","type":"input","field":"Organization","placeholder":""},{"modelName":"select4","name":"涉及协议或应用","type":"select","field":"Protocol","options":{"labels":"HTTP,FTP","values":"HTTP,FTP"}},{"modelName":"input5","name":"开放端口","type":"input","field":"Port","placeholder":""}]';
+const test = '[{"type":"input","modelName":"test1","name":"输入框1","field":"ip","placeholder":""}]';
+const wigetSettings = {
+    ip: wigetsOfIp,
+    test
+}
+
+
+export { navList,sections,methods,defaultWigets,wigetSettings };
