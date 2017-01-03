@@ -21,13 +21,13 @@
                         <span class="form-left">{{wiget.name}}</span>
                         <el-input
                           :placeholder="wiget.placeholder"
-                          v-model=wiget.modelName>
+                          v-model=wiget.modelValue>
                         </el-input>
                     </div>
 
                     <div class="form-item" v-if="wiget.type==='select' ">
                         <span class="form-left">{{wiget.name}}</span>
-                         <el-select size="small" v-model=wiget.modelName>
+                         <el-select size="small" v-model=wiget.modelValue>
                             <el-option
                               v-for="item in wiget.options"
                               :label="item.label"
@@ -42,7 +42,7 @@
                                 <i class="iconfont">&#xe683;</i>
                             </el-tooltip>
                         :</span>
-                        <el-slider class="form-right" v-model=wiget.modelName show-input
+                        <el-slider class="form-right" v-model=wiget.modelValue show-input
                             :min="wiget.min"
                             :max="wiget.max"
                         ></el-slider>
@@ -50,7 +50,7 @@
                     <div class="form-item" v-if="wiget.type==='datepicker' ">
                         <span class="form-left">{{wiget.name}}</span>
                         <el-date-picker class="form-right"
-                          v-model=wiget.modelName
+                          v-model=wiget.modelValue
                           type="datetime"
                           placeholder="选择日期时间">
                         </el-date-picker>
@@ -239,7 +239,7 @@ export default {
         const type = this.tool.type;
 
         const added = {
-            modelName: type+(this.wigets.length),
+            modelValue: type+(this.wigets.length),
             name: this.tool.name,
             type: this.tool.type,
             field: this.tool.field,
@@ -256,7 +256,7 @@ export default {
     },
     //更新按钮
     updateWiget(){
-        // const {modelName,...others} = {...this.tool};
+        // const {modelValue,...others} = {...this.tool};
         // const cur = {
         //     type,
         //     name,
@@ -274,7 +274,7 @@ export default {
     },
     editWiget(index){
         this.isEditing = true;
-        const {type,modelName,name,...setting} = this.wigets[index];
+        const {type,modelValue,name,...setting} = this.wigets[index];
         this.tool.type = type;
         this.tool.name = name;
         this.tool[type] = setting

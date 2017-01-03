@@ -6,13 +6,13 @@
                 <span class="form-left">{{wiget.name}}</span>
                 <el-input
                   :placeholder="wiget.placeholder"
-                  v-model=wiget.modelName>
+                  v-model=wiget.modelValue>
                 </el-input>
             </div>
 
             <div class="form-item" v-if="wiget.type==='select' ">
                 <span class="form-left">{{wiget.name}}</span>
-                 <el-select size="small" v-model=wiget.modelName>
+                 <el-select size="small" v-model=wiget.modelValue>
                     <el-option
                       v-for="item in wiget.options"
                       :label="item.label"
@@ -27,7 +27,7 @@
                         <i class="iconfont">&#xe683;</i>
                     </el-tooltip>
                 :</span>
-                <el-slider class="form-right" v-model=wiget.modelName show-input
+                <el-slider class="form-right" v-model=wiget.modelValue show-input
                     :min="wiget.min"
                     :max="wiget.max"
                 ></el-slider>
@@ -35,7 +35,7 @@
             <div class="form-item" v-if="wiget.type==='datepicker' ">
                 <span class="form-left">{{wiget.name}}</span>
                 <el-date-picker class="form-right"
-                  v-model=wiget.modelName
+                  v-model=wiget.modelValue
                   type="datetime"
                   placeholder="选择日期时间">
                 </el-date-picker>
@@ -120,6 +120,9 @@ export default {
       this.showModal = false;
       console.log(this.wigets)
       if(this.onYes) this.onYes();
+    },
+    fetchServerData(){
+      //
     }
 
 
