@@ -1,57 +1,71 @@
 <template>
     <div class="my-tool-container">
-        <div class="toolbar">
+        <div class="tool-bar">
+            <div>
+                <span class="tag" @click="exportCode"><el-tag >导出</el-tag></span>
+                <span class="tag" @click="testModal"><el-tag >测试modal</el-tag></span>
+            </div>
 
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 2, maxRows: 4}"
+              placeholder="请输入内容"
+              v-model="textarea"
+              class="code-area">
+            </el-input>
         </div>
         <div class="tool-main">
-            <div ref="wigets" v-for="(wiget,index) in wigetList" class="row">
-                <div class="form-item" v-if="wiget.type==='input' ">
-                    <span class="form-left">{{wiget.name}}</span>
-                    <el-input
-                      :placeholder="wiget.placeholder"
-                      v-model="wiget.modelName">
-                    </el-input>
-                </div>
+            <draggable :list="wigetList" >
+                <div ref="wigets" v-for="(wiget,index) in wigetList" class="row">
+                    <div class="form-item" v-if="wiget.type==='input' ">
+                        <span class="form-left">{{wiget.name}}</span>
+                        <el-input
+                          :placeholder="wiget.placeholder"
+                          v-model="wiget.modelName">
+                        </el-input>
+                    </div>
 
-                <div class="form-item" v-if="wiget.type==='select' ">
-                    <span class="form-left">{{wiget.name}}</span>
-                     <el-select size="small" v-model="wiget.modelName">
-                        <el-option
-                          v-for="item in wiget.options"
-                          :label="item.label"
-                          :value="item.value">
-                        </el-option>
-                      </el-select>
-                </div>
+                    <div class="form-item" v-if="wiget.type==='select' ">
+                        <span class="form-left">{{wiget.name}}</span>
+                         <el-select size="small" v-model="wiget.modelName">
+                            <el-option
+                              v-for="item in wiget.options"
+                              :label="item.label"
+                              :value="item.value">
+                            </el-option>
+                          </el-select>
+                    </div>
 
-                <div class="form-item" v-if="wiget.type==='slider' ">
-                    <span class="form-left">{{wiget.name}}
-                        <el-tooltip class="item" effect="dark" :content="wiget.tooltip" placement="top-start">
-                            <i class="iconfont">&#xe683;</i>
-                        </el-tooltip>
-                    :</span>
-                    <el-slider class="form-right" v-model="wiget.modelName" show-input
-                        :min="wiget.min"
-                        :max="wiget.max"
-                    ></el-slider>
+                    <div class="form-item" v-if="wiget.type==='slider' ">
+                        <span class="form-left">{{wiget.name}}
+                            <el-tooltip class="item" effect="dark" :content="wiget.tooltip" placement="top-start">
+                                <i class="iconfont">&#xe683;</i>
+                            </el-tooltip>
+                        :</span>
+                        <el-slider class="form-right" v-model="wiget.modelName" show-input
+                            :min="wiget.min"
+                            :max="wiget.max"
+                        ></el-slider>
+                    </div>
+                    <div class="form-item" v-if="wiget.type==='datepicker' ">
+                        <span class="form-left">{{wiget.name}}</span>
+                        <el-date-picker class="form-right"
+                          v-model="wiget.modelName"
+                          type="datetime"
+                          placeholder="选择日期时间">
+                        </el-date-picker>
+                    </div>
+                    <div class="actions-group">
+                        <span @click="editWiget(index)"><i class="iconfont icon-bianji"></i></span>
+                        <span @click="deleteWiget(index)"><i class="iconfont icon-shanchu"></i></span>
+                    </div>
                 </div>
-                <div class="form-item" v-if="wiget.type==='datepicker' ">
-                    <span class="form-left">{{wiget.name}}</span>
-                    <el-date-picker class="form-right"
-                      v-model="wiget.modelName"
-                      type="datetime"
-                      placeholder="选择日期时间">
-                    </el-date-picker>
-                </div>
-                <div class="actions-group">
-                    <span @click="editWiget(index)"><i class="iconfont icon-bianji"></i></span>
-                    <span @click="deleteWiget(index)"><i class="iconfont icon-shanchu"></i></span>
-                </div>
-            </div>
+            </draggable>
             <div>
                 <span><i class="iconfont icon-tianjia" @click="showAndAdd"></i></span>
             </div>
         </div>
+
 
 
         <el-dialog title="定制栏" v-model="dialogFormVisible">
@@ -120,6 +134,9 @@
                 <el-button type="primary" v-else @click="addWiget">添加</el-button>
             </div>
         </el-dialog>
+        <editModal :wigetList="wigetList" :show = "editModalVisible"
+            :onYes="onYes" :onCancel="onCancel"
+        ></editModal>
 
     </div>
 
@@ -128,6 +145,8 @@
 <script>
 // import util from '../utils/util'
 import { defaultWigets } from '../../const/constants'
+import draggable from 'vuedraggable'
+import editModal from '../components/editModal/editModal'
 
 const tool = {
             labelWidth: '120px',
@@ -168,16 +187,20 @@ const options = ['option1','option2','option3']
 export default {
 
   components: {
-
+    draggable,
+    editModal
   },
   props:['serverInfo'],
   data(){
     return {
+        textarea:'',
         isEditing: false,
         dialogFormVisible:false,
         wigets: [...defaultWigets],
         tool:{...tool},
         currentView: null,
+
+        editModalVisible:false
     }
   },
 
@@ -186,10 +209,8 @@ export default {
         return this.wigets.map(wiget=>{
             const type = wiget.type;
             if(wiget.type==='select'){
-                console.log(wiget)
                 let {options,...others} = {...wiget};
                 const valueArr = wiget.options.values.split(',');
-                console.log(options)
                 return {
                     ...others,
                     options: options.labels.split(',').reduce((prev,cur,index)=>{
@@ -255,6 +276,26 @@ export default {
         this.isEditing = false;
         this.toggleDialog(true);
 
+    },
+    exportCode(){
+        console.log("--------")
+        debugger;
+
+        this.textarea = this.$refs.wigets.join('');
+        console.log(this.textarea)
+        // this.$refs.wigets
+    },
+
+    testModal(){
+        this.editModalVisible = true;
+        console.log("----------editModalVisible ",this.editModalVisible);
+
+    },
+    onYes(){
+        this.editModalVisible = false;
+    },
+    onCancel(){
+        this.editModalVisible = false;
     }
   }
 };
@@ -267,6 +308,11 @@ export default {
     width: 100%;
     height: 100%;
     margin: 0;
+    .tool-main,.tool-bar{
+        /*float: right;*/
+        cursor: pointer;
+        padding: 10px 50px;
+    }
     .tool-main{
         overflow: auto;
         background-color: white;
@@ -319,6 +365,9 @@ export default {
     .tag{
         text-align: center;
     }
+}
+.code-area{
+    overflow: hidden;
 }
 
 /*.tool-main{
