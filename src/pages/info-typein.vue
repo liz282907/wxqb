@@ -643,8 +643,6 @@ export default {
 
 
         postBody = this.beforeSubmit(postBody);
-
-        debugger;
         axios.post(serverUrl.createInfo,{
             [target]:{
                     [targetValue]: postBody

@@ -2,7 +2,9 @@
     <div class="my-tool-container">
         <div class="tool-bar">
             <div>
-                <span class="tag" @click="testModal"><el-tag >ip</el-tag></span>
+                <span class="tag" @click="testModal('ip')"><el-tag >ip</el-tag></span>
+                <span class="tag" @click="testModal('dns')"><el-tag >DNS</el-tag></span>
+                <span class="tag" @click="testModal('url')"><el-tag >URL</el-tag></span>
             </div>
 
 
@@ -11,8 +13,8 @@
 
         </div>
 
-        <editModal :wigetList="wigetList" :show = "editModalVisible"
-            :onYes="onYes" :onCancel="onCancel"
+        <editModal :wigetList="wigetList"  :show = "editModalVisible" :category="category"
+            :onUpdate="onUpdate" :onCancel="onCancel"
         ></editModal>
 
     </div>
@@ -25,7 +27,6 @@ import draggable from 'vuedraggable'
 import editModal from '../components/editModal/editModal'
 
 import { wigetSettings } from '../../const/constants'
-
 export default {
 
   components: {
@@ -33,13 +34,19 @@ export default {
     editModal
   },
   data(){
-    const wigets = JSON.parse(wigetSettings.test);
+    const wigets = JSON.parse(wigetSettings.ip);
+    const serverData = JSON.parse(wigetSettings.ipData);
 
     return {
         wigets:[...wigets],
-        wigetsForIP: [...wigets],
-        wigetsForDNS:[],
-        wigetsForURL:[],
+        serverData,
+        category:'',
+
+        // wigetsForIP: [...wigets],
+        // // serverDataOfIp: JSON.parse(wigetSettings.ipData),
+
+        // wigetsForDNS:[],
+        // wigetsForURL:[],
         editModalVisible:false
     }
   },
@@ -48,11 +55,13 @@ export default {
     wigetList(){
         if(!this.wigets.length) return [];
         return this.wigets.map(wiget=>{
+
             const type = wiget.type;
-            if(wiget.type==='select'){
+            let newWiget = wiget;
+            if(type==='select'){
                 let {options,...others} = {...wiget};
                 const valueArr = wiget.options.values.split(',');
-                return {
+                newWiget =  {
                     ...others,
                     options: options.labels.split(',').reduce((prev,cur,index)=>{
                                 prev.push({label:cur,value:valueArr[index]});
@@ -60,20 +69,29 @@ export default {
                             },[])
                 }
             }
-            else return wiget;
+            if(this.serverData){
+                newWiget.modelValue = this.serverData[wiget.field];
+            }
+
+            return newWiget;
         })
     }
   },
 
   methods:{
 
-    onYes(){
+    onUpdate(){
+
         this.editModalVisible = false;
     },
     onCancel(){
         this.editModalVisible = false;
     },
-    testModal(){
+    testModal(category){
+        this.category = category;
+        this.wigets = JSON.parse(wigetSettings[category]);
+        console.log(this.wigets);
+        this.serverData = JSON.parse(wigetSettings[category+'Data']);
         this.editModalVisible = true;
         console.log("----------editModalVisible ",this.editModalVisible);
 

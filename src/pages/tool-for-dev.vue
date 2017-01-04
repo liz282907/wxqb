@@ -55,6 +55,15 @@
                           placeholder="选择日期时间">
                         </el-date-picker>
                     </div>
+                    <div class="form-item" v-if="wiget.type==='radio' ">
+                        <span class="form-left">{{wiget.name}}</span>
+                        <el-radio-group size="small" v-model=wiget.modelValue>
+                          <el-radio-button :label="1" >是</el-radio-button>
+                          <el-radio-button :label="0" >否</el-radio-button>
+                          <el-radio-button :label="-1" >未知</el-radio-button>
+                        </el-radio-group>
+                    </div>
+
                     <div class="actions-group">
                         <span @click="editWiget(index)"><i class="iconfont icon-bianji"></i></span>
                         <span @click="deleteWiget(index)"><i class="iconfont icon-shanchu"></i></span>
@@ -82,6 +91,7 @@
                     <el-option label="下拉菜单" value="select"></el-option>
                     <el-option label="拖动栏" value="slider"></el-option>
                     <el-option label="日期选择器" value="datepicker"></el-option>
+                    <el-option lable="单选按钮" value="radio"></el-option>
                   </el-select>
                 </el-form-item>
                 <div class="setting">

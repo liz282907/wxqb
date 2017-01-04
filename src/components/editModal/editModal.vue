@@ -40,6 +40,15 @@
                   placeholder="选择日期时间">
                 </el-date-picker>
             </div>
+            <div class="form-item" v-if="wiget.type==='radio' ">
+                <span class="form-left">{{wiget.name}}</span>
+                <el-radio-group size="small" v-model=wiget.modelValue>
+                  <el-radio-button :label="1" >是</el-radio-button>
+                  <el-radio-button :label="0" >否</el-radio-button>
+                  <el-radio-button :label="-1" >未知</el-radio-button>
+                </el-radio-group>
+            </div>
+
 <!--             <div class="actions-group">
                 <span @click="editWiget(index)"><i class="iconfont icon-bianji"></i></span>
                 <span @click="deleteWiget(index)"><i class="iconfont icon-shanchu"></i></span>
@@ -48,7 +57,7 @@
       </draggable>
       <div slot="footer" class="dialog-footer">
         <el-button @click="onCancelClick">取 消</el-button>
-        <el-button type="primary" @click="onYesClick">确 定</el-button>
+        <el-button type="primary" @click="onYesClick">更新</el-button>
       </div>
     </el-dialog>
 
@@ -57,6 +66,9 @@
 
 <script>
 import draggable from 'vuedraggable'
+import { serverUrl }from '../../../const/url'
+import util from '../../utils/util'
+
 
 
 export default {
@@ -67,10 +79,14 @@ export default {
       required:true,
       default:[]
     },
+    category:{
+      type: String,
+      default:''
+    },
     onCancel:{
       type:Function
     },
-    onYes:{
+    onUpdate:{
       type: Function
     },
     show:{
@@ -89,22 +105,28 @@ export default {
     },
     show(val){
       this.showModal = val;
+    },
+    wigetList(val){
+      this.wigets = val;
     }
-    // showModal(val){
-    //   this.$emit('input',val);
-    //   if(val) this.$emit('open');
-    //   else this.$emit('close');
-    // }
   },
   data() {
     return {
       showModal: this.show,
-      wigets: this.wigetList
+      wigets: this.wigetList,
     };
   },
 
   computed:{
-
+    postBody(){
+      return this.wigets.reduce((prev,wiget)=>{
+        if(wiget.field.match(/Time/)){
+            prev[wiget.field] = util.formatTimeStr(wiget.modelValue);
+          }
+        else prev[wiget.field] = wiget.modelValue;
+        return prev;
+      },{})
+    }
   },
 
   created(){
@@ -117,13 +139,41 @@ export default {
       if(this.onCancel) this.onCancel()
     },
     onYesClick(){
+      this.updateInfo();
       this.showModal = false;
-      console.log(this.wigets)
-      if(this.onYes) this.onYes();
+      if(this.onUpdate) this.onUpdate();
     },
-    fetchServerData(){
-      //
-    }
+    beforeSubmit(data){
+
+      Object.keys(data).forEach(key=>{
+        const value = data[key];
+        if(!util.isValidInput(value))
+          delete data[key];
+        else{
+          //transform时间
+          if(key.match(/Time/)){
+            data[key] = util.formatTimeStr(data[key]);
+          }
+        }
+
+      });
+      return data;
+    },
+    updateInfo(){
+
+        axios.post(serverUrl.createInfo,{
+            [this.category]:this.postBody
+        })
+        .then(response=> {
+            this.reset(target);
+            this.$message({message: `更新${this.category}成功`,type:'success'});
+        })
+        .catch(err=>{
+            console.log(err);
+            this.$message({message: `更新${this.category}失败`,type:'error'});
+        });
+    },
+
 
 
 
