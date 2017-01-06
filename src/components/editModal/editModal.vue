@@ -1,5 +1,5 @@
 <template>
-    <el-dialog title="编辑" v-model="showModal">
+    <el-dialog title="编辑" v-model="showModal" @close="closeOnBtn" :close-on-click-modal='false'>
       <draggable :list="wigets" >
         <div ref="wigets" v-for="(wiget,index) in wigets" class="row">
             <div class="form-item" v-if="wiget.type==='input' ">
@@ -92,7 +92,11 @@ export default {
     show:{
       type: Boolean,
       default: false
-    }
+    },
+    // closeOnBtn:{
+    //   type: Function
+    // }
+
 
   },
   components:{
@@ -173,6 +177,10 @@ export default {
             this.$message({message: `更新${this.category}失败`,type:'error'});
         });
     },
+    closeOnBtn(){
+      this.showModal = false;
+      this.$emit('close');
+    }
 
 
 

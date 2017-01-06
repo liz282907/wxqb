@@ -15,6 +15,7 @@
 
         <editModal :wigetList="wigetList"  :show = "editModalVisible" :category="category"
             :onUpdate="onUpdate" :onCancel="onCancel"
+            @close="editModalVisible = false"
         ></editModal>
 
     </div>
@@ -96,6 +97,10 @@ export default {
         console.log("----------editModalVisible ",this.editModalVisible);
 
     },
+    parentListener(){
+        debugger
+        this.editModalVisible = false;
+    }
   }
 };
 </script>
