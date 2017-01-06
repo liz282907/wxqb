@@ -5,6 +5,7 @@
             <div class="form-item" v-if="wiget.type==='input' ">
                 <span class="form-left">{{wiget.name}}</span>
                 <el-input
+                  class="form-right"
                   :placeholder="wiget.placeholder"
                   v-model=wiget.modelValue>
                 </el-input>
@@ -12,7 +13,7 @@
 
             <div class="form-item" v-if="wiget.type==='select' ">
                 <span class="form-left">{{wiget.name}}</span>
-                 <el-select size="small" v-model=wiget.modelValue>
+                 <el-select size="small" class="form-right" v-model=wiget.modelValue>
                     <el-option
                       v-for="item in wiget.options"
                       :label="item.label"
@@ -42,7 +43,7 @@
             </div>
             <div class="form-item" v-if="wiget.type==='radio' ">
                 <span class="form-left">{{wiget.name}}</span>
-                <el-radio-group size="small" v-model=wiget.modelValue>
+                <el-radio-group size="small" class="form-right" v-model=wiget.modelValue>
                   <el-radio-button :label="1" >是</el-radio-button>
                   <el-radio-button :label="0" >否</el-radio-button>
                   <el-radio-button :label="-1" >未知</el-radio-button>

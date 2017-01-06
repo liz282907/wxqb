@@ -58,7 +58,7 @@ const defaultWigets = [
     },
     {
         type: 'slider',
-        modelValue: '4',
+        modelValue: 4,
         field:'Credibility',
         name: '等级bar',
         tooltip: '0-30：低；31-75：中；76-100：高',
@@ -69,7 +69,7 @@ const defaultWigets = [
 
 
 const wigetsOfIp = '[{"type":"input","modelValue":"input1","name":"互联网提供商","placeholder":"","field":"ISP","input":{"placeholder":""},"select":{"options":{"labels":"HTTPS,FTP","values":"HTTPS,FTP"}},"slider":{"tooltip":"","min":0,"max":100}},{"type":"select","name":"操作系统标识","modelValue":"select2","options":{"labels":"选项1,选项2,选项3","values":"value1,value2,value3"},"field":"OS","input":{"placeholder":""},"select":{"options":{"labels":"选项1,选项2,选项3","values":"value1,value2,value3"}},"slider":{"tooltip":"","min":0,"max":100}},{"type":"slider","modelValue":0,"name":"信誉度","tooltip":"0-30：低；31-75：中；76-100：高","min":0,"max":100,"field":"Credibility","input":{"placeholder":""},"select":{"options":{"labels":"HTTPS,FTP","values":"HTTP,FTP"}},"slider":{"tooltip":"0-30：低；31-75：中；76-100：高","min":0,"max":100}},{"modelValue":"input3","name":"所属机构","type":"input","field":"Organization","placeholder":""},{"modelValue":"select4","name":"涉及协议或应用","type":"select","field":"Protocol","options":{"labels":"HTTP,FTP","values":"HTTP,FTP"}},{"modelValue":"input5","name":"开放端口","type":"input","field":"Port","placeholder":""}]';
-const serverDataOfIp = '{"ISP":"test-ISP","OS": "windows","Credibility": "70","Organization":"信工所","Protocol": "HTTPS","Port": "443"}';
+const serverDataOfIp = '{"ISP":"test-ISP","OS": "windows","Credibility": 70,"Organization":"信工所","Protocol": "HTTPS","Port": "443"}';
 
 const wigetsOfDNS = '[{"type":"input","modelValue":"testPerson","name":"注册人","field":"Registrant","placeholder":"","input":{"field":"ip","placeholder":"请输入注册人"},"select":{"options":{}},"slider":{"tooltip":"","min":0,"max":100}},{"modelValue":"","name":"互联网提供商","type":"input","field":"ISP","placeholder":""},{"modelValue":"datepicker2","name":"注册时间","type":"datepicker","field":"RegTime"}]';
 const serverDataOfDNS = '{"ISP":"test-ISP","Registrant":"liz","RegTime":""}';

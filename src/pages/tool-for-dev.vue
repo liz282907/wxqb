@@ -373,6 +373,7 @@ export default {
             white-space: nowrap;
             text-align: right;
             padding-right: 20px;
+            box-sizing: border-box;
         }
         .form-right{
             flex: 1;
