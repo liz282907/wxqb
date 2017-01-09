@@ -11,9 +11,20 @@
                 </el-input>
             </div>
 
-            <div class="form-item" v-if="wiget.type==='select' ">
+            <div class="form-item" v-if="wiget.type==='select' && !wiget.multiple" >
                 <span class="form-left">{{wiget.name}}</span>
-                 <el-select size="small" class="form-right" v-model=wiget.modelValue>
+                 <el-select size="small" class="form-right" v-model='wiget.modelValue'>
+                    <el-option
+                      v-for="item in wiget.options"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+            </div>
+
+            <div class="form-item" v-if="wiget.type==='select'&& wiget.multiple" multiple>
+                <span class="form-left">{{wiget.name}}</span>
+                 <el-select size="small" class="form-right" v-model='wiget.modelValue'>
                     <el-option
                       v-for="item in wiget.options"
                       :label="item.label"
@@ -105,13 +116,13 @@ export default {
   },
   watch:{
     value(val){
-      console.log("-------",val);
       this.showModal = val;
     },
     show(val){
       this.showModal = val;
     },
     wigetList(val){
+      console.log(val)
       this.wigets = val;
     }
   },

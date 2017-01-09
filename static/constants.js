@@ -1,7 +1,6 @@
 export default {
     "protocols": [
         "https",
-        "smtp",
         "imap",
         "sip",
         "http",

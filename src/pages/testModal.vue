@@ -78,6 +78,11 @@ export default {
         })
     }
   },
+  watch:{
+    wigetList(val){
+        console.log("change wigetList",val)
+    }
+  },
 
   methods:{
 
@@ -90,15 +95,12 @@ export default {
     },
     testModal(category){
         this.category = category;
-        this.wigets = JSON.parse(wigetSettings[category]);
-        console.log(this.wigets);
+        this.wigets = [...JSON.parse(wigetSettings[category])];
         this.serverData = JSON.parse(wigetSettings[category+'Data']);
         this.editModalVisible = true;
-        console.log("----------editModalVisible ",this.editModalVisible);
-
+        console.log(this.wigetList);
     },
     parentListener(){
-        debugger
         this.editModalVisible = false;
     }
   }

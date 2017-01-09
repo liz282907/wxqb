@@ -105,10 +105,16 @@
                     </el-form-item>
                     <el-form-item label="备选项" label-width="120px" v-if=" tool.type==='select' ">
                         <div class="form-item" >
+                            <el-radio-group size="small" v-model=tool.select.multiple>
+                              <el-radio-button :label="1" >多选</el-radio-button>
+                              <el-radio-button :label="0" >单选</el-radio-button>
+                            </el-radio-group>
+                        </div>
+                        <div class="form-item" >
                             <el-input
                             placeholder="各选项显示值(中文)，逗号分隔"
                           v-model="tool.select.options.labels">
-                        </el-input>
+                            </el-input>
                         </div>
                         <div class="form-item" >
                             <el-input
@@ -170,7 +176,8 @@ const tool = {
                 placeholder:''
             },
             select:{
-                options:{}
+                options:{},
+                multiple: false,
             },
             slider:{
                 tooltip:'',
