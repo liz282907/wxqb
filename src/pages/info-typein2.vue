@@ -14,7 +14,7 @@
 
                                 <div class="form-item">
                                     <span class="form-left">攻击时间 :</span>
-                                    <el-date-picker
+                                    <el-date-picker class="form-right"
                                       v-model="event.AttackTime"
                                       type="daterange"
                                       placeholder="选择日期范围"
@@ -23,25 +23,25 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">摘要 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入digest"
                                       v-model="event.Digest">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">代号 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入代号"
                                       v-model="event.IncidentCode">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">发布机构 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="名称"
                                       v-model="event.AuthorityName">
                                     </el-input>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="发布机构代号"
                                       v-model="event.AuthorityCode">
                                     </el-input>
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">来源 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入来源"
                                       v-model="event.Source">
                                     </el-input>
@@ -69,86 +69,98 @@
                             <div class="form-part">
                                 <div class="form-item">
                                     <span class="form-left">黑客组织 : </span>
-                                     <el-input placeholder="关联黑客组织名称" size="small">
+                                     <el-input class="form-right" placeholder="关联黑客组织名称" size="small">
                                         v-model="event.HackingOrg"
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">攻击ip : </span>
-                                     <el-input placeholder="攻击ip,回车分隔" size="small">
-                                        v-model="event.SourceIP"
+                                     <el-input class="form-right" placeholder="攻击ip,回车分隔" size="small" v-model="event.SourceIP">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">攻击dns : </span>
-                                     <el-input placeholder="攻击ip,回车分隔" size="small">
-                                        v-model="event.DNS"
+                                     <el-input class="form-right"
+                                     v-model="event.DNS" placeholder="攻击ip,回车分隔" size="small">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">MD5 : </span>
-                                     <el-input placeholder="MD5" size="small">
-                                        v-model="event.MD5"
+                                     <el-input class="form-right"
+                                     v-model="event.MD5" placeholder="MD5" size="small">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">动机 : </span>
-                                     <el-input placeholder="多个请逗号分隔" size="small">
-                                        v-model="event.Intention"
+                                     <el-input class="form-right"
+                                     v-model="event.Intention" placeholder="多个请逗号分隔" size="small">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">攻击特征 : </span>
-                                     <el-input placeholder="多个请逗号分隔" size="small">
-                                        v-model="event.AttackSignature"
+                                     <el-input class="form-right"
+                                     v-model="event.AttackSignature" placeholder="多个请逗号分隔" size="small">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">攻击手法 : </span>
-                                     <el-input placeholder="多个请逗号分隔" size="small">
-                                        v-model="event.AttackMethod"
+                                     <el-input class="form-right"
+                                     v-model="event.AttackMethod" placeholder="多个请逗号分隔" size="small">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">关联恶意URL : </span>
-                                     <el-input placeholder="URL,多个请逗号分隔" size="small">
-                                        v-model="event.URL"
+                                     <el-input class="form-right"
+                                     v-model="event.URL" placeholder="URL,多个请逗号分隔" size="small">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">关联钓鱼邮件 : </span>
-                                     <el-input placeholder="多个请逗号分隔" size="small">
-                                        v-model="event.PhishingEmail"
+                                     <el-input class="form-right"
+                                     v-model="event.PhishingEmail" placeholder="多个请逗号分隔" size="small">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">被攻击ip : </span>
-                                     <el-input placeholder="多个请逗号分隔" size="small">
-                                        v-model="event.TargetIP"
+                                     <el-input class="form-right"
+                                     v-model="event.TargetIP" placeholder="多个请逗号分隔" size="small">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">被攻击公司 : </span>
-                                     <el-input placeholder="多个请逗号分隔" size="small">
-                                        v-model="event.CompanyName"
+                                     <el-input  class="form-right"
+                                     v-model="event.CompanyName" placeholder="多个请逗号分隔" size="small">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">公司资产 : </span>
-                                     <el-input placeholder="多个请逗号分隔" size="small">
-                                        v-model="event.CompanyAsset"
+                                     <el-input class="form-right"
+                                     v-model="event.CompanyAsset"
+                                      placeholder="多个请逗号分隔" size="small">
+
                                     </el-input>
                                 </div>
 
                                 <div class="form-item">
                                     <span class="form-left">关联漏洞库 : </span>
-                                    <el-input placeholder="请输入漏洞库" size="small">
-                                        v-model="event.Hole"
+                                    <el-input  class="form-right"
+                                    v-model="event.Hole" placeholder="请输入漏洞库" size="small">
+
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left"> :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入来源"
                                       size="small"
                                       v-model="event.dev_source">
@@ -171,7 +183,7 @@
 
                                 <div class="form-item">
                                     <span class="form-left">影响资产 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入"
                                       size="small"
                                       v-model="event.Asset">
@@ -191,7 +203,7 @@
                             <span class="sub-title">其他信息</span>
                             <div class="form-part">
                                 <span class="form-left">备注 :</span>
-                                <el-input
+                                <el-input class="form-right"
                                       type="textarea"
                                       :autosize="{ minRows: 4}"
                                       placeholder="请输入内容"

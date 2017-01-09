@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">存活 :</span>
-                                    <el-radio-group size="small" v-model="ip.Survivability">
+                                    <el-radio-group size="small" v-model="ip.Survivability" class="form-right">
                                       <el-radio-button :label="1" >是</el-radio-button>
                                       <el-radio-button :label="0" >否</el-radio-button>
                                       <el-radio-button :label="-1" >未知</el-radio-button>
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">来源 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入来源"
                                       v-model="ip.CREDIT_Source">
                                     </el-input>
@@ -94,12 +94,12 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">开放端口 : </span>
-                                    <el-input placeholder="请输入端口号" size="small" v-model="ip.Port">
+                                    <el-input class="form-right" placeholder="请输入端口号" size="small" v-model="ip.Port">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">来源 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入来源"
                                       size="small"
                                       v-model="ip.DEV_Source">
@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">ISP :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入ISP"
                                       size="small"
                                       v-model="ip.ISP">
@@ -172,7 +172,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">VPS :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入VPS"
                                       size="small"
                                       v-model="ip.VPS">
@@ -180,7 +180,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">来源 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入来源"
                                       size="small"
                                       v-model="ip.GEO_Source">
@@ -231,21 +231,21 @@
                             <div class="form-part">
                                 <div class="form-item">
                                     <span class="form-left">注册人 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入注册人信息"
                                       v-model="dns.Registrant">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">注册邮箱 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入注册邮箱"
                                       v-model="dns.RegEmail">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">注册时间 :</span>
-                                    <el-date-picker
+                                    <el-date-picker class="form-right"
                                       v-model="dns.RegTime"
                                       type="datetime"
                                       placeholder="选择日期时间">
@@ -253,7 +253,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">ISP :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入服务提供商"
                                       size="small"
                                       v-model="dns.ISP">
@@ -261,7 +261,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">来源 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入来源"
                                       size="small"
                                       v-model="dns.WHOIS_Source">
@@ -290,7 +290,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">发现时间 :</span>
-                                    <el-date-picker
+                                    <el-date-picker class="form-right"
                                       v-model="dns.DiscoveryTime"
                                       type="datetime"
                                       placeholder="选择日期时间">
@@ -298,7 +298,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">来源 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入来源"
                                       v-model="dns.CREDIT_Source">
                                     </el-input>
@@ -349,7 +349,7 @@
                             <div class="form-part">
                                 <div class="form-item">
                                     <span class="form-left">存活 :</span>
-                                    <el-radio-group size="small" v-model="url.Survivability">
+                                    <el-radio-group class="form-right" size="small" v-model="url.Survivability">
                                       <el-radio-button :label="1" >是</el-radio-button>
                                       <el-radio-button :label="0" >否</el-radio-button>
                                       <el-radio-button :label="-1" >未知</el-radio-button>
@@ -357,7 +357,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">初次发现时间 :</span>
-                                    <el-date-picker
+                                    <el-date-picker class="form-right"
                                       v-model="url.FirstDiscoveryTime"
                                       type="datetime"
                                       placeholder="选择日期时间">
@@ -365,7 +365,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">来源 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入来源"
                                       size="small"
                                       v-model="url.BASIC_Source">
@@ -386,7 +386,7 @@
                             <div class="form-part">
                                 <div class="form-item">
                                     <span class="form-left">请求方法 :</span>
-                                    <el-select size="small" v-model="url.RequestMethod" multiple>
+                                    <el-select class="form-right" size="small" v-model="url.RequestMethod" multiple>
                                         <el-option
                                           v-for="item in locals.methods"
                                           :label="item"
@@ -396,7 +396,7 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">webshell类型 :</span>
-                                    <el-select size="small" v-model="url.WebshellName" multiple>
+                                    <el-select class="form-right" size="small" v-model="url.WebshellName" multiple>
                                         <el-option
                                           v-for="item in serverInfo.webshellTypes"
                                           :label="item"
@@ -406,14 +406,14 @@
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">webshell所属页面名称 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入所属页面名称"
                                       v-model="url.Title">
                                     </el-input>
                                 </div>
                                 <div class="form-item">
                                     <span class="form-left">来源 :</span>
-                                    <el-input
+                                    <el-input class="form-right"
                                       placeholder="请输入来源"
                                       v-model="url.WS_Source">
                                     </el-input>
@@ -471,22 +471,22 @@ import Library from './info-typein2.vue';
 const initObj = {
   ip:{
             ip: '',
-            Credibility: null,
+            Credibility: -1,
             DiscoveryTime: null,
             Survivability: -1,
             CREDIT_Source: '',
-            CREDIT_SourceReliability: null,
+            CREDIT_SourceReliability: -1,
 
             Protocol:[],
             OS:'',
             Port:'',
             DEV_Source: '',
-            DEV_SourceReliability: null,
+            DEV_SourceReliability: -1,
 
             ISP: '',
             VPS: '',
             GEO_Source: '',
-            GEO_SourceReliability: null,
+            GEO_SourceReliability: -1,
             Address:{
                 country:'',
                 district: '',
@@ -498,17 +498,17 @@ const initObj = {
         },
         dns:{
             dns:'',
-            Credibility: null,
+            Credibility: -1,
             DiscoveryTime: '',
             CREDIT_Source: '',
-            CREDIT_SourceReliability: null,
+            CREDIT_SourceReliability: -1,
 
             Registrant: '',
             RegEmail: '',
             RegTime: null,
             ISP: '',
             WHOIS_Source: '',
-            WHOIS_SourceReliability: null,
+            WHOIS_SourceReliability: -1,
 
             Note:''
 
@@ -519,7 +519,7 @@ const initObj = {
             FirstDiscoveryTime: null,
             ActionTag: [],
             BASIC_Source: '',
-            BASIC_SourceReliability: null,
+            BASIC_SourceReliability: -1,
             Survivability: -1,
 
             RequestMethod: '',
@@ -527,7 +527,7 @@ const initObj = {
             WebshellName: '',
             WebshellFile: '',
             WS_Source: '',
-            WS_SourceReliability: null,
+            WS_SourceReliability: -1,
             Note:''
         }
 }
