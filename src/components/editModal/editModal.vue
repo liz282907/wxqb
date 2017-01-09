@@ -7,13 +7,13 @@
                 <el-input
                   class="form-right"
                   :placeholder="wiget.placeholder"
-                  v-model=wiget.modelValue>
+                  v-model=form[wiget.field]>
                 </el-input>
             </div>
 
             <div class="form-item" v-if="wiget.type==='select' && !wiget.multiple" >
                 <span class="form-left">{{wiget.name}}</span>
-                 <el-select size="small" class="form-right" v-model='wiget.modelValue'>
+                 <el-select size="small" class="form-right" v-model=form[wiget.field]>
                     <el-option
                       v-for="item in wiget.options"
                       :label="item.label"
@@ -24,7 +24,7 @@
 
             <div class="form-item" v-if="wiget.type==='select'&& wiget.multiple" multiple>
                 <span class="form-left">{{wiget.name}}</span>
-                 <el-select size="small" class="form-right" v-model='wiget.modelValue'>
+                 <el-select size="small" class="form-right" v-model=form[wiget.field]>
                     <el-option
                       v-for="item in wiget.options"
                       :label="item.label"
@@ -39,7 +39,7 @@
                         <i class="iconfont">&#xe683;</i>
                     </el-tooltip>
                 :</span>
-                <el-slider class="form-right" v-model=wiget.modelValue show-input
+                <el-slider class="form-right" v-model=form[wiget.field] show-input
                     :min="wiget.min"
                     :max="wiget.max"
                 ></el-slider>
@@ -47,14 +47,14 @@
             <div class="form-item" v-if="wiget.type==='datepicker' ">
                 <span class="form-left">{{wiget.name}}</span>
                 <el-date-picker class="form-right"
-                  v-model=wiget.modelValue
+                  v-model=form[wiget.modelValue]
                   type="datetime"
                   placeholder="选择日期时间">
                 </el-date-picker>
             </div>
             <div class="form-item" v-if="wiget.type==='radio' ">
                 <span class="form-left">{{wiget.name}}</span>
-                <el-radio-group size="small" class="form-right" v-model=wiget.modelValue>
+                <el-radio-group size="small" class="form-right" v-model=form[wiget.field]>
                   <el-radio-button :label="1" >是</el-radio-button>
                   <el-radio-button :label="0" >否</el-radio-button>
                   <el-radio-button :label="-1" >未知</el-radio-button>
@@ -122,26 +122,41 @@ export default {
       this.showModal = val;
     },
     wigetList(val){
-      console.log(val)
       this.wigets = val;
+      this.form = val.reduce((prev,wiget)=>{
+          prev[wiget.field] = wiget.modelValue;
+          return prev;
+       },{});
+      console.log(JSON.stringify(val));
+      console.log(JSON.stringify(this.form));
     }
   },
   data() {
+     const wigetTest = this.wigetList.reduce((prev,wiget)=>{
+      // if(wiget.type==='select') debugger
+        prev[wiget.field] = wiget.modelValue;
+        return prev;
+     },{});
+
+
     return {
       showModal: this.show,
       wigets: this.wigetList,
+      form: {...wigetTest}
+
     };
   },
 
   computed:{
     postBody(){
-      return this.wigets.reduce((prev,wiget)=>{
-        if(wiget.field.match(/Time/)){
-            prev[wiget.field] = util.formatTimeStr(wiget.modelValue);
-          }
-        else prev[wiget.field] = wiget.modelValue;
-        return prev;
-      },{})
+      return this.wigetTest;
+      // return this.wigets.reduce((prev,wiget)=>{
+      //   if(wiget.field.match(/Time/)){
+      //       prev[wiget.field] = util.formatTimeStr(wiget.modelValue);
+      //     }
+      //   else prev[wiget.field] = wiget.modelValue;
+      //   return prev;
+      // },{})
     }
   },
 
